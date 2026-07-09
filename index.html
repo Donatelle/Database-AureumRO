@@ -12,48 +12,48 @@
             color: #e8eaed;
             min-height: 100vh;
         }
-     .header {
+    .header {
             background: linear-gradient(135deg, #1a1f35 0%, #2d1810 100%);
             padding: 20px;
             border-bottom: 3px solid #d4af37;
             box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
-     .header-content { max-width: 1400px; margin: 0 auto; }
+    .header-content { max-width: 1400px; margin: 0 auto; }
         h1 {
             color: #d4af37;
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
-     .info-bar {
+    .info-bar {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
             margin-top: 15px;
             font-size: 0.9em;
         }
-     .info-item {
+    .info-item {
             background: rgba(212, 175, 55, 0.1);
             padding: 8px 15px;
             border-radius: 8px;
             border: 1px solid #d4af37;
         }
-     .info-item strong { color: #d4af37; }
-     .info-item a { color: #ffa726; text-decoration: none; }
-     .info-item a:hover { text-decoration: underline; }
-     .cupom { 
-            background: linear-gradient(135deg, #d4af37, #f57c00); 
-            color: #000; 
+    .info-item strong { color: #d4af37; }
+    .info-item a { color: #ffa726; text-decoration: none; }
+    .info-item a:hover { text-decoration: underline; }
+    .cupom {
+            background: linear-gradient(135deg, #d4af37, #f57c00);
+            color: #000;
             font-weight: bold;
         }
-     .tabs {
+    .tabs {
             max-width: 1400px;
             margin: 20px auto 0;
             display: flex;
             gap: 10px;
             padding: 0 20px;
         }
-     .tab {
+    .tab {
             padding: 12px 30px;
             background: #1a1f35;
             border: 2px solid #2d3748;
@@ -64,15 +64,15 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-     .tab:hover { background: #2d3748; }
-     .tab.active {
+    .tab:hover { background: #2d3748; }
+    .tab.active {
             background: #2d1810;
             border-color: #d4af37;
             color: #d4af37;
         }
-     .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-     .search-box { margin-bottom: 20px; display: flex; gap: 10px; }
-     .search-box input {
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    .search-box { margin-bottom: 20px; display: flex; gap: 10px; }
+    .search-box input {
             flex: 1;
             padding: 15px 20px;
             font-size: 1.1em;
@@ -82,12 +82,12 @@
             color: #e8eaed;
             transition: all 0.3s;
         }
-     .search-box input:focus {
+    .search-box input:focus {
             outline: none;
             border-color: #d4af37;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
-     .btn-clear {
+    .btn-clear {
             padding: 15px 25px;
             background: #d4af37;
             color: #000;
@@ -97,42 +97,53 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-     .btn-clear:hover { background: #f57c00; }
-     .loading { text-align: center; padding: 40px; font-size: 1.2em; color: #d4af37; }
-     .error {
+    .btn-clear:hover { background: #f57c00; }
+    .loading { text-align: center; padding: 40px; font-size: 1.2em; color: #d4af37; }
+    .error {
             background: rgba(239, 68, 68, 0.1);
             border: 2px solid #ef4444;
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
         }
-     .cards-grid {
+    .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
-     .card {
+    .card {
             background: #1a1f35;
             border: 2px solid #2d3748;
             border-radius: 10px;
             padding: 15px;
             transition: all 0.3s;
         }
-     .card:hover {
+    .card:hover {
             border-color: #d4af37;
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
         }
-     .card-title {
+    .card-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    .card-title {
             color: #d4af37;
             font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 10px;
         }
-     .card-content { color: #cbd5e1; line-height: 1.6; font-size: 0.95em; }
-     .counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; }
-     .notice {
+    .card-content { color: #cbd5e1; line-height: 1.6; font-size: 0.95em; }
+    .card-content strong { color: #ffa726; }
+    .counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; }
+    .notice {
             background: rgba(212, 175, 55, 0.1);
             border-left: 4px solid #d4af37;
             padding: 12px 15px;
@@ -142,9 +153,9 @@
         }
         @media (max-width: 768px) {
             h1 { font-size: 1.8em; }
-         .cards-grid { grid-template-columns: 1fr; }
-         .info-bar { font-size: 0.8em; }
-         .search-box { flex-direction: column; }
+        .cards-grid { grid-template-columns: 1fr; }
+        .info-bar { font-size: 0.8em; }
+        .search-box { flex-direction: column; }
         }
     </style>
 </head>
@@ -168,14 +179,14 @@
 
     <div class="container">
         <div class="notice">📊 Dados atualizados automaticamente do Google Sheets</div>
-        
+
         <div id="almas-content">
             <div class="search-box">
-                <input type="text" id="searchAlmas" placeholder="🔍 Buscar almas por nome ou efeito... ex: AGI, Critico, Dano" oninput="filterItems('almas')">
+                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome ou efeito... ex: AGI, Critico, Mapa, Carta" oninput="filterItems('almas')">
                 <button class="btn-clear" onclick="clearSearch('almas')">Todas</button>
             </div>
             <div class="counter" id="counterAlmas"></div>
-            <div id="almas-list" class="loading">Carregando almas...</div>
+            <div id="almas-list" class="loading">Carregando almas e coleções...</div>
         </div>
 
         <div id="hats-content" style="display: none;">
@@ -216,7 +227,7 @@
                     continue;
                 }
             }
-            throw new Error(`HTTP 403 - Falha em todos os proxies. Verifica se a planilha está pública.`);
+            throw new Error(`Falha ao carregar. Verifica se a planilha está pública em Arquivo > Publicar na web`);
         }
 
         async function loadData() {
@@ -229,22 +240,22 @@
 
                 allAlmas = parseTSV(almasText);
                 allHats = parseTSV(hatsText);
-                
+
                 const questData = parseTSV(questText);
                 questData.forEach(q => {
-                    if (q[0]) questHats[q[0].trim()] = q;
+                    if (q[0]) questHats[q[0].trim().toLowerCase()] = q;
                 });
 
                 renderAlmas(allAlmas);
                 renderHats(allHats);
             } catch (error) {
                 const msg = `<div class="error">
-                    ❌ Erro ao carregar Almas: ${error.message}<br><br>
-                    <strong>Verifica se as planilhas estão públicas:</strong><br>
+                    ❌ ${error.message}<br><br>
+                    <strong>Como publicar:</strong><br>
                     1. Arquivo > Compartilhar > Publicar na web<br>
-                    2. Seleciona cada aba e marca "Valores separados por tabulações (.tsv)"<br>
+                    2. Seleciona cada aba e marca ".tsv"<br>
                     3. Clica Publicar<br>
-                    4. Compartilhar > Geral > Qualquer pessoa com o link > Leitor
+                    4. Compartilhar > Qualquer pessoa com o link > Leitor
                 </div>`;
                 document.getElementById('almas-list').innerHTML = msg;
                 document.getElementById('hats-list').innerHTML = msg;
@@ -253,36 +264,47 @@
 
         function parseTSV(text) {
             return text.split('\n')
-              .map(line => line.split('\t').map(cell => cell.trim()))
-              .filter(row => row.some(cell => cell));
+            .map(line => line.split('\t').map(cell => cell.trim()))
+            .filter(row => row.some(cell => cell));
         }
 
         function renderAlmas(data) {
             const container = document.getElementById('almas-list');
             const counter = document.getElementById('counterAlmas');
-            
-            const items = data.filter(row => row[0] === 'ALMA' && row[1]);
-            counter.textContent = `${items.length} Almas encontradas`;
+
+            // Pega ALMA, COLEÇÃO DE MAPA e COLEÇÃO DE CARTA
+            const items = data.filter(row =>
+                ['ALMA', 'COLEÇÃO DE MAPA', 'COLEÇÃO DE CARTA'].includes(row[0]) && row[1]
+            );
+
+            counter.textContent = `${items.length} itens encontrados`;
 
             if (items.length === 0) {
-                container.innerHTML = '<div class="error">Nenhuma alma encontrada</div>';
+                container.innerHTML = '<div class="error">Nenhum item encontrado</div>';
                 return;
             }
 
             container.innerHTML = `<div class="cards-grid">
-                ${items.map(row => `
-                    <div class="card">
-                        <div class="card-title">${row[1] || 'Sem nome'}</div>
-                        <div class="card-content">${row[2] || 'Sem descrição'}</div>
-                    </div>
-                `).join('')}
+                ${items.map(row => {
+                    const tipo = row[0];
+                    const nome = row[1] || 'Sem nome';
+                    const desc = row[2] || 'Sem descrição';
+                    const tag = tipo.replace('COLEÇÃO DE ', '');
+                    return `
+                        <div class="card">
+                            <div class="card-tag">${tag}</div>
+                            <div class="card-title">${nome}</div>
+                            <div class="card-content">${desc}</div>
+                        </div>
+                    `;
+                }).join('')}
             </div>`;
         }
 
         function renderHats(data) {
             const container = document.getElementById('hats-list');
             const counter = document.getElementById('counterHats');
-            
+
             const items = data.slice(1).filter(row => row[0]);
             counter.textContent = `${items.length} Hats encontrados`;
 
@@ -294,14 +316,16 @@
             container.innerHTML = `<div class="cards-grid">
                 ${items.map(row => {
                     const hatName = row[0];
-                    const hatInfo = row.slice(1).filter(Boolean).join(' | ');
-                    const quest = questHats[hatName];
+                    const hatInfo = row.slice(1).filter(Boolean).join('<br>');
+                    const quest = questHats[hatName.toLowerCase()];
+                    const questInfo = quest? quest.slice(1).filter(Boolean).join('<br>') : '';
+
                     return `
                         <div class="card">
                             <div class="card-title">🎩 ${hatName}</div>
                             <div class="card-content">
                                 ${hatInfo || 'Sem descrição'}
-                                ${quest? `<br><br><strong style="color: #ffa726;">Quest:</strong><br>${quest.slice(1).filter(Boolean).join(' | ')}` : ''}
+                                ${questInfo? `<br><br><strong>Quest:</strong><br>${questInfo}` : ''}
                             </div>
                         </div>
                     `;
@@ -311,14 +335,14 @@
 
         function filterItems(type) {
             const searchTerm = document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value.toLowerCase();
-            
+
             if (type === 'almas') {
                 if (!searchTerm) {
                     renderAlmas(allAlmas);
                     return;
                 }
-                const filtered = allAlmas.filter(row => 
-                    row[0] === 'ALMA' && 
+                const filtered = allAlmas.filter(row =>
+                    ['ALMA', 'COLEÇÃO DE MAPA', 'COLEÇÃO DE CARTA'].includes(row[0]) &&
                     (row[1]?.toLowerCase().includes(searchTerm) || row[2]?.toLowerCase().includes(searchTerm))
                 );
                 renderAlmas(filtered);
@@ -327,8 +351,8 @@
                     renderHats(allHats);
                     return;
                 }
-                const filtered = allHats.filter(row => 
-                    row[0]?.toLowerCase().includes(searchTerm) || row[1]?.toLowerCase().includes(searchTerm)
+                const filtered = allHats.filter(row =>
+                    row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
                 );
                 renderHats(filtered);
             }
@@ -342,7 +366,7 @@
         function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
-            
+
             document.getElementById('almas-content').style.display = tab === 'almas'? 'block' : 'none';
             document.getElementById('hats-content').style.display = tab === 'hats'? 'block' : 'none';
         }
