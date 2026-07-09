@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database AureumRO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e1a;
+            color: #e8eaed;
+            min-height: 100vh;
+        }
+       .header {
+            background: linear-gradient(135deg, #1a1f35 0%, #2d1810 100%);
+            padding: 20px;
+            border-bottom: 3px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+       .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #d4af37;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+       .info-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+       .info-item {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid #d4af37;
+        }
+       .info-item strong { color: #d4af37; }
+       .info-item a { color: #ffa726; text-decoration: none; }
+       .info-item a:hover { text-decoration: underline; }
+       .cupom { 
+            background: linear-gradient(135deg, #d4af37, #f57c00); 
+            color: #000; 
+            font-weight: bold;
+        }
+       .tabs {
+            max-width: 1400px;
+            margin: 20px auto 0;
+            display: flex;
+            gap: 10px;
+            padding: 0 20px;
+        }
+       .tab {
+            padding: 12px 30px;
+            background: #1a1f35;
+            border: 2px solid #2d3748;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+       .tab:hover { background: #2d3748; }
+       .tab.active {
+            background: #2d1810;
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+       .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+       .search-box {
+            margin-bottom: 20px;
+        }
+       .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            background: #1a1f35;
+            border: 2px solid #2d3748;
+            border-radius: 10px;
+            color: #e8eaed;
+            transition: all 0.3s;
+        }
+       .search-box input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+       .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #d4af37;
+        }
+       .error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid #ef4444;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+       .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+       .card {
+            background: #1a1f35;
+            border: 2px solid #2d3748;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+       .card:hover {
+            border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+        }
+       .card-title {
+            color: #d4af37;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+       .card-content {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+       .counter {
+            margin-bottom: 15px;
+            color: #ffa726;
+            font-weight: 600;
+        }
+       .notice {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+           .cards-grid { grid-template-columns: 1fr; }
+           .info-bar { font-size: 0.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>⚔️ Database AureumRO ⚔️</h1>
+            <div class="info-bar">
+                <div class="info-item"><strong>Lançamento:</strong> 04/07/2026</div>
+                <div class="info-item"><strong>Site:</strong> <a href="https://aureumro.com/" target="_blank">aureumro.com</a></div>
+                <div class="info-item"><strong>Wiki:</strong> <a href="https://wiki.aureumro.com/" target="_blank">wiki.aureumro.com</a></div>
+                <div class="info-item cupom"><strong>Cupom:</strong> DONATELLE</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('almas')">Almas e Coleções</div>
+        <div class="tab" onclick="switchTab('hats')">HATS</div>
+    </div>
+
+    <div class="container">
+        <div class="notice">📊 Dados atualizados automaticamente do Google Sheets</div>
+        
+        <div id="almas-content">
+            <div class="search-box">
+                <input type="text" id="searchAlmas" placeholder="🔍 Buscar almas por nome ou efeito... ex: AGI, Critico, Dano" oninput="filterItems('almas')">
+            </div>
+            <div class="counter" id="counterAlmas"></div>
+            <div id="almas-list" class="loading">Carregando almas...</div>
+        </div>
+
+        <div id="hats-content" style="display: none;">
+            <div class="search-box">
+                <input type="text" id="searchHats" placeholder="🔍 Buscar hats por nome..." oninput="filterItems('hats')">
+            </div>
+            <div class="counter" id="counterHats"></div>
+            <div id="hats-list" class="loading">Carregando hats...</div>
+        </div>
+    </div>
+
+    <script>
+        const URLS = {
+            almas: 'https://corsproxy.io/?https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=542113926&single=true&output=tsv',
+            hats: 'https://corsproxy.io/?https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=242749534&single=true&output=tsv',
+            questHats: 'https://corsproxy.io/?https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=1575882958&single=true&output=tsv'
+        };
+
+        let allAlmas = [];
+        let allHats = [];
+        let questHats = {};
+
+        async function loadData() {
+            try {
+                // Carrega Almas
+                const almasRes = await fetch(URLS.almas);
+                const almasText = await almasRes.text();
+                allAlmas = parseTSV(almasText);
+                renderAlmas(allAlmas);
+
+                // Carrega Hats
+                const hatsRes = await fetch(URLS.hats);
+                const hatsText = await hatsRes.text();
+                allHats = parseTSV(hatsText);
+
+                // Carrega Quest Hats
+                const questRes = await fetch(URLS.questHats);
+                const questText = await questRes.text();
+                const questData = parseTSV(questText);
+                questData.forEach(q => {
+                    if (q[0]) questHats[q[0]] = q;
+                });
+
+                renderHats(allHats);
+            } catch (error) {
+                document.getElementById('almas-list').innerHTML = `<div class="error">❌ Erro ao carregar dados: ${error.message}<br>Verifica se as planilhas estão públicas e publicadas como TSV.</div>`;
+                document.getElementById('hats-list').innerHTML = `<div class="error">❌ Erro ao carregar dados: ${error.message}</div>`;
+            }
+        }
+
+        function parseTSV(text) {
+            const lines = text.split('\n');
+            return lines.map(line => line.split('\t')).filter(row => row.some(cell => cell.trim()));
+        }
+
+        function renderAlmas(data) {
+            const container = document.getElementById('almas-list');
+            const counter = document.getElementById('counterAlmas');
+            
+            const items = data.filter(row => row[0] === 'ALMA' && row[1]);
+            counter.textContent = `${items.length} Almas encontradas`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhuma alma encontrada</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(row => `
+                    <div class="card">
+                        <div class="card-title">${row[1] || 'Sem nome'}</div>
+                        <div class="card-content">${row[2] || 'Sem descrição'}</div>
+                    </div>
+                `).join('')}
+            </div>`;
+        }
+
+        function renderHats(data) {
+            const container = document.getElementById('hats-list');
+            const counter = document.getElementById('counterHats');
+            
+            const items = data.filter(row => row[0] && row[0]!== '');
+            counter.textContent = `${items.length} Hats encontrados`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhum hat encontrado</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(row => {
+                    const hatName = row[0];
+                    const hatInfo = row[1] || '';
+                    const quest = questHats[hatName];
+                    return `
+                        <div class="card">
+                            <div class="card-title">🎩 ${hatName}</div>
+                            <div class="card-content">
+                                ${hatInfo}
+                                ${quest? `<br><br><strong style="color: #ffa726;">Quest:</strong><br>${quest[1] || 'Ver detalhes na planilha'}` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>`;
+        }
+
+        function filterItems(type) {
+            const searchTerm = document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value.toLowerCase();
+            
+            if (type === 'almas') {
+                if (!searchTerm) {
+                    renderAlmas(allAlmas);
+                    return;
+                }
+                const filtered = allAlmas.filter(row => 
+                    row[0] === 'ALMA' && 
+                    (row[1]?.toLowerCase().includes(searchTerm) || row[2]?.toLowerCase().includes(searchTerm))
+                );
+                renderAlmas(filtered);
+            } else if (type === 'hats') {
+                if (!searchTerm) {
+                    renderHats(allHats);
+                    return;
+                }
+                const filtered = allHats.filter(row => 
+                    row[0]?.toLowerCase().includes(searchTerm) || row[1]?.toLowerCase().includes(searchTerm)
+                );
+                renderHats(filtered);
+            }
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('almas-content').style.display = tab === 'almas'? 'block' : 'none';
+            document.getElementById('hats-content').style.display = tab === 'hats'? 'block' : 'none';
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
