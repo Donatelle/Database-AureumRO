@@ -19,17 +19,59 @@
             box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
    .header-content { max-width: 1400px; margin: 0 auto; }
+   .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+   .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+   .logo-icon {
+            font-size: 2.5em;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        }
         h1 {
             color: #d4af37;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2.2em;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
+   .header-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+   .btn-link {
+            padding: 10px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            color: #e8eaed;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+   .btn-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+   .btn-cupom {
+            background: linear-gradient(135deg, #d4af37, #f57c00);
+            color: #000;
+            border: none;
+        }
+   .btn-cupom:hover { background: linear-gradient(135deg, #f57c00, #d4af37); }
    .info-bar {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 15px;
+            gap: 10px;
             font-size: 0.9em;
         }
    .info-item {
@@ -39,42 +81,48 @@
             border: 1px solid #d4af37;
         }
    .info-item strong { color: #d4af37; }
-   .info-item a { color: #ffa726; text-decoration: none; }
-   .info-item a:hover { text-decoration: underline; }
-   .cupom {
-            background: linear-gradient(135deg, #d4af37, #f57c00);
-            color: #000;
-            font-weight: bold;
-        }
    .tabs {
             max-width: 1400px;
             margin: 20px auto 0;
             display: flex;
             gap: 10px;
             padding: 0 20px;
+            flex-wrap: wrap;
         }
    .tab {
-            padding: 12px 30px;
+            padding: 14px 35px;
             background: #1a1f35;
             border: 2px solid #2d3748;
             border-bottom: none;
-            border-radius: 10px 10px 0 0;
+            border-radius: 12px 12px 0 0;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-weight: 600;
             transition: all 0.3s;
         }
    .tab:hover { background: #2d3748; }
    .tab.active {
-            background: #2d1810;
+            background: linear-gradient(135deg, #f57c00, #d4af37);
             border-color: #d4af37;
-            color: #d4af37;
+            color: #000;
         }
    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-   .search-box { margin-bottom: 20px; display: flex; gap: 10px; }
+   .notice {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+   .search-box { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
    .search-box input {
             flex: 1;
-            padding: 15px 20px;
+            min-width: 250px;
+            padding: 14px 18px;
             font-size: 1em;
             background: #1a1f35;
             border: 2px solid #2d3748;
@@ -87,18 +135,30 @@
             border-color: #d4af37;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
-   .btn-clear {
-            padding: 15px 25px;
-            background: #d4af37;
-            color: #000;
-            border: none;
+   .filter-btns {
+            display: flex;
+            gap: 8px;
+        }
+   .btn-filter {
+            padding: 14px 20px;
+            background: #1a1f35;
+            border: 2px solid #2d3748;
             border-radius: 10px;
-            font-weight: bold;
+            color: #e8eaed;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
-   .btn-clear:hover { background: #f57c00; }
-   .loading { text-align: center; padding: 40px; font-size: 1.2em; color: #d4af37; }
+   .btn-filter:hover { border-color: #d4af37; }
+   .btn-filter.active {
+            background: #d4af37;
+            color: #000;
+            border-color: #d4af37;
+        }
+   .btn-filter.alma.active { background: #d4af37; }
+   .btn-filter.mapa.active { background: #3b82f6; }
+   .btn-filter.carta.active { background: #a855f7; }
+   .loading { text-align: center; padding: 40px; font-size: 1.1em; color: #d4af37; }
    .error {
             background: rgba(239, 68, 68, 0.1);
             border: 2px solid #ef4444;
@@ -109,110 +169,128 @@
    .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 12px;
+            gap: 15px;
             margin-top: 20px;
         }
    .card {
             background: #1a1f35;
             border: 2px solid #2d3748;
-            border-radius: 8px;
+            border-left: 4px solid #d4af37;
+            border-radius: 10px;
             padding: 12px;
             transition: all 0.3s;
-            border-left: 4px solid #2d3748;
         }
+   .card.alma { border-left-color: #d4af37; }
+   .card.mapa { border-left-color: #3b82f6; }
+   .card.carta { border-left-color: #a855f7; }
    .card:hover {
+            border-color: #d4af37;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
         }
-   .card-alma { border-left-color: #d4af37; }
-   .card-alma:hover { border-color: #d4af37; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2); }
-   .card-mapa { border-left-color: #3b82f6; }
-   .card-mapa:hover { border-color: #3b82f6; box-shadow: 0 5px 20px rgba(59, 130, 246, 0.2); }
-   .card-carta { border-left-color: #a855f7; }
-   .card-carta:hover { border-color: #a855f7; box-shadow: 0 5px 20px rgba(168, 85, 247, 0.2); }
-   .card-hat { border-left-color: #f97316; }
-   .card-hat:hover { border-color: #f97316; box-shadow: 0 5px 20px rgba(249, 115, 22, 0.2); }
    .card-tag {
             display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
+            padding: 3px 10px;
+            border-radius: 5px;
             font-size: 0.7em;
             font-weight: bold;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
-   .tag-alma { background: rgba(212, 175, 55, 0.2); color: #d4af37; }
-   .tag-mapa { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-   .tag-carta { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
-   .tag-hat { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+   .card-tag.alma { background: #d4af37; color: #000; }
+   .card-tag.mapa { background: #3b82f6; color: #fff; }
+   .card-tag.carta { background: #a855f7; color: #fff; }
+   .card-tag.hat { background: #ea580c; color: #fff; }
    .card-title {
+            color: #d4af37;
             font-size: 1em;
             font-weight: bold;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
-   .title-alma { color: #d4af37; }
-   .title-mapa { color: #3b82f6; }
-   .title-carta { color: #a855f7; }
-   .title-hat { color: #f97316; }
-   .card-content { 
-            color: #cbd5e1; 
-            line-height: 1.5; 
-            font-size: 0.85em; 
+   .card.mapa.card-title { color: #3b82f6; }
+   .card.carta.card-title { color: #a855f7; }
+   .card-content {
+            color: #cbd5e1;
+            line-height: 1.5;
+            font-size: 0.85em;
         }
    .card-content strong { color: #ffa726; }
-   .counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; font-size: 0.9em; }
-   .notice {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid #d4af37;
-            padding: 12px 15px;
-            margin-bottom: 20px;
+   .quest-item {
+            background: rgba(255, 167, 38, 0.1);
+            padding: 8px;
             border-radius: 5px;
-            font-size: 0.9em;
+            margin-top: 8px;
+            font-size: 0.8em;
         }
+   .counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; font-size: 0.9em; }
         @media (max-width: 768px) {
-            h1 { font-size: 1.8em; }
+            h1 { font-size: 1.5em; }
+           .header-top { flex-direction: column; align-items: flex-start; }
        .cards-grid { grid-template-columns: 1fr; }
-       .info-bar { font-size: 0.8em; }
-       .search-box { flex-direction: column; }
+       .tab { padding: 12px 20px; font-size: 0.95em; }
+       .filter-btns { width: 100%; }
+       .btn-filter { flex: 1; }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="header-content">
-            <h1>⚔️ Database AureumRO ⚔️</h1>
+            <div class="header-top">
+                <div class="logo">
+                    <span class="logo-icon">⚔️</span>
+                    <h1>Database AureumRO</h1>
+                </div>
+                <div class="header-links">
+                    <a href="https://aureumro.com/" target="_blank" class="btn-link">🌐 Site Oficial</a>
+                    <a href="https://wiki.aureumro.com/" target="_blank" class="btn-link">📖 Wiki</a>
+                    <a href="https://discord.gg/pmGggBDFN5" target="_blank" class="btn-link">💬 Discord</a>
+                    <div class="btn-link btn-cupom">🎁 Cupom: DONATELLE</div>
+                </div>
             <div class="info-bar">
-                <div class="info-item"><strong>Lançamento:</strong> 04/07/2026</div>
-                <div class="info-item"><strong>Site:</strong> <a href="https://aureumro.com/" target="_blank">aureumro.com</a></div>
-                <div class="info-item"><strong>Wiki:</strong> <a href="https://wiki.aureumro.com/" target="_blank">wiki.aureumro.com</a></div>
-                <div class="info-item cupom"><strong>Cupom:</strong> DONATELLE</div>
+                <div class="info-item">🟢 <strong>Lançamento:</strong> 04/07/2026</div>
             </div>
         </div>
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="switchTab('almas')">Almas e Coleções</div>
-        <div class="tab" onclick="switchTab('hats')">HATS</div>
+        <div class="tab active" onclick="switchTab('almas')">📦 Almas e Coleções</div>
+        <div class="tab" onclick="switchTab('hats')">🎩 HATS</div>
+        <div class="tab" onclick="switchTab('quests')">📜 QUEST HATS</div>
     </div>
 
     <div class="container">
-        <div class="notice">📊 Dados atualizados automaticamente do Google Sheets - ALMA, MAPA e CARTA</div>
+        <div class="notice">🔄 Dados atualizados automaticamente do Google Sheets - ALMA, MAPA e CARTA</div>
 
         <div id="almas-content">
             <div class="search-box">
-                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome ou efeito... ex: AGI, Critico, Mapa, Carta" oninput="filterItems('almas')">
-                <button class="btn-clear" onclick="clearSearch('almas')">Todas</button>
+                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome, tipo ou efeito... ex: AGI, Critico, Dano" oninput="filterItems('almas')">
+                <div class="filter-btns">
+                    <button class="btn-filter active" onclick="filterType('todas')">Todas</button>
+                    <button class="btn-filter alma" onclick="filterType('alma')">ALMA</button>
+                    <button class="btn-filter mapa" onclick="filterType('mapa')">MAPA</button>
+                    <button class="btn-filter carta" onclick="filterType('carta')">CARTA</button>
+                </div>
             </div>
             <div class="counter" id="counterAlmas"></div>
-            <div id="almas-list" class="loading">Carregando almas, mapas e cartas...</div>
+            <div id="almas-list" class="loading">Carregando almas e coleções...</div>
         </div>
 
         <div id="hats-content" style="display: none;">
             <div class="search-box">
                 <input type="text" id="searchHats" placeholder="🔍 Buscar hats por nome..." oninput="filterItems('hats')">
-                <button class="btn-clear" onclick="clearSearch('hats')">Todos</button>
+                <button class="btn-filter active" onclick="clearSearch('hats')">Todos</button>
             </div>
             <div class="counter" id="counterHats"></div>
             <div id="hats-list" class="loading">Carregando hats...</div>
+        </div>
+
+        <div id="quests-content" style="display: none;">
+            <div class="search-box">
+                <input type="text" id="searchQuests" placeholder="🔍 Buscar quest por hat..." oninput="filterItems('quests')">
+                <button class="btn-filter active" onclick="clearSearch('quests')">Todas</button>
+            </div>
+            <div class="counter" id="counterQuests"></div>
+            <div id="quests-list" class="loading">Carregando quests...</div>
         </div>
     </div>
 
@@ -229,9 +307,10 @@
             'https://api.allorigins.win/raw?url='
         ];
 
-        let allAlmas = [];
+        let allData = [];
         let allHats = [];
-        let questHats = {};
+        let allQuests = [];
+        let currentFilter = 'todas';
 
         async function fetchWithProxy(url) {
             let lastError;
@@ -244,7 +323,7 @@
                     continue;
                 }
             }
-            throw new Error(`Blocked: Todos os proxies falharam. Google Sheets bloqueou o acesso.`);
+            throw new Error(`Falha ao carregar. Verifica se a planilha está pública`);
         }
 
         async function loadData() {
@@ -255,26 +334,24 @@
                     fetchWithProxy(SHEETS.questHats)
                 ]);
 
-                allAlmas = parseTSV(almasText);
+                allData = parseTSV(almasText);
                 allHats = parseTSV(hatsText);
+                allQuests = parseTSV(questText);
 
-                const questData = parseTSV(questText);
-                questData.forEach(q => {
-                    if (q[0]) questHats[q[0].trim().toLowerCase()] = q;
-                });
-
-                renderAlmas(allAlmas);
+                renderAlmas(allData);
                 renderHats(allHats);
+                renderQuests(allQuests);
             } catch (error) {
                 const msg = `<div class="error">
                     ❌ ${error.message}<br><br>
-                    <strong>Solução:</strong><br>
-                    1. Confere se publicou em Arquivo > Publicar na web >.tsv<br>
-                    2. Compartilhar > Qualquer pessoa com link > Leitor<br>
-                    3. Se ainda bloquear, usa Google Apps Script
+                    <strong>Publica a planilha:</strong><br>
+                    1. Arquivo > Compartilhar > Publicar na web<br>
+                    2. Seleciona cada aba >.tsv > Publicar<br>
+                    3. Compartilhar > Qualquer pessoa com link > Leitor
                 </div>`;
                 document.getElementById('almas-list').innerHTML = msg;
                 document.getElementById('hats-list').innerHTML = msg;
+                document.getElementById('quests-list').innerHTML = msg;
             }
         }
 
@@ -288,9 +365,12 @@
             const container = document.getElementById('almas-list');
             const counter = document.getElementById('counterAlmas');
 
-            const items = data.filter(row =>
-                ['ALMA', 'MAPA', 'CARTA'].includes(row[0]) && row[1]
-            );
+            const items = data.filter(row => {
+                const tipo = row[0]?.toUpperCase();
+                if (!['ALMA', 'MAPA', 'CARTA'].includes(tipo) ||!row[1]) return false;
+                if (currentFilter === 'todas') return true;
+                return tipo === currentFilter.toUpperCase();
+            });
 
             counter.textContent = `${items.length} itens encontrados`;
 
@@ -301,14 +381,13 @@
 
             container.innerHTML = `<div class="cards-grid">
                 ${items.map(row => {
-                    const tipo = row[0];
+                    const tipo = row[0].toLowerCase();
                     const nome = row[1] || 'Sem nome';
                     const desc = row[2] || 'Sem descrição';
-                    const tipoLower = tipo.toLowerCase();
                     return `
-                        <div class="card card-${tipoLower}">
-                            <div class="card-tag tag-${tipoLower}">${tipo}</div>
-                            <div class="card-title title-${tipoLower}">${nome}</div>
+                        <div class="card ${tipo}">
+                            <div class="card-tag ${tipo}">${row[0]}</div>
+                            <div class="card-title">${nome}</div>
                             <div class="card-content">${desc}</div>
                         </div>
                     `;
@@ -332,16 +411,41 @@
                 ${items.map(row => {
                     const hatName = row[0];
                     const hatInfo = row.slice(1).filter(Boolean).join('<br>');
-                    const quest = questHats[hatName.toLowerCase()];
-                    const questInfo = quest? quest.slice(1).filter(Boolean).join('<br>') : '';
-
                     return `
-                        <div class="card card-hat">
-                            <div class="card-tag tag-hat">HAT</div>
-                            <div class="card-title title-hat">🎩 ${hatName}</div>
+                        <div class="card">
+                            <div class="card-tag hat">HAT</div>
+                            <div class="card-title">🎩 ${hatName}</div>
+                            <div class="card-content">${hatInfo || 'Sem descrição'}</div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>`;
+        }
+
+        function renderQuests(data) {
+            const container = document.getElementById('quests-list');
+            const counter = document.getElementById('counterQuests');
+
+            const items = data.slice(1).filter(row => row[0]);
+            counter.textContent = `${items.length} Quests encontradas`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhuma quest encontrada</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(row => {
+                    const hatName = row[0];
+                    const custo = row[2] || '0';
+                    const ingredientes = row.slice(3).filter(Boolean);
+                    return `
+                        <div class="card">
+                            <div class="card-tag hat">QUEST</div>
+                            <div class="card-title">📜 ${hatName}</div>
                             <div class="card-content">
-                                ${hatInfo || 'Sem descrição'}
-                                ${questInfo? `<br><br><strong>Quest:</strong><br>${questInfo}` : ''}
+                                <strong>Custo:</strong> ${custo} Zeny<br>
+                                ${ingredientes.length > 0? `<div class="quest-item"><strong>Ingredientes:</strong><br>${ingredientes.join('<br>')}</div>` : ''}
                             </div>
                         </div>
                     `;
@@ -349,18 +453,27 @@
             </div>`;
         }
 
+        function filterType(tipo) {
+            currentFilter = tipo;
+            document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderAlmas(allData);
+        }
+
         function filterItems(type) {
             const searchTerm = document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value.toLowerCase();
 
             if (type === 'almas') {
-                if (!searchTerm) {
-                    renderAlmas(allAlmas);
+                if (!searchTerm && currentFilter === 'todas') {
+                    renderAlmas(allData);
                     return;
                 }
-                const filtered = allAlmas.filter(row =>
-                    ['ALMA', 'MAPA', 'CARTA'].includes(row[0]) &&
-                    (row[1]?.toLowerCase().includes(searchTerm) || row[2]?.toLowerCase().includes(searchTerm))
-                );
+                const filtered = allData.filter(row => {
+                    const tipo = row[0]?.toUpperCase();
+                    if (!['ALMA', 'MAPA', 'CARTA'].includes(tipo)) return false;
+                    if (currentFilter!== 'todas' && tipo!== currentFilter.toUpperCase()) return false;
+                    return row[1]?.toLowerCase().includes(searchTerm) || row[2]?.toLowerCase().includes(searchTerm);
+                });
                 renderAlmas(filtered);
             } else if (type === 'hats') {
                 if (!searchTerm) {
@@ -371,6 +484,15 @@
                     row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
                 );
                 renderHats(filtered);
+            } else if (type === 'quests') {
+                if (!searchTerm) {
+                    renderQuests(allQuests);
+                    return;
+                }
+                const filtered = allQuests.filter(row =>
+                    row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
+                );
+                renderQuests(filtered);
             }
         }
 
@@ -385,6 +507,7 @@
 
             document.getElementById('almas-content').style.display = tab === 'almas'? 'block' : 'none';
             document.getElementById('hats-content').style.display = tab === 'hats'? 'block' : 'none';
+            document.getElementById('quests-content').style.display = tab === 'quests'? 'block' : 'none';
         }
 
         loadData();
