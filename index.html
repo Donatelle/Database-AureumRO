@@ -90,13 +90,13 @@
             flex-wrap: wrap;
         }
 .tab {
-            padding: 14px 24px;
+            padding: 14px 28px;
             background: #1a1f35;
             border: 2px solid #2d3748;
             border-bottom: none;
             border-radius: 12px 12px 0 0;
             cursor: pointer;
-            font-size: 0.95em;
+            font-size: 1em;
             font-weight: 600;
             transition: all 0.3s;
         }
@@ -218,106 +218,53 @@
             font-size: 0.85em;
         }
 .card-content strong { color: #ffa726; }
-.counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; font-size: 0.9em; }
-
-/* CALCULADORA DROP */
-.calc-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-.calc-section {
-            background: #1a1f35;
-            border: 2px solid #2d3748;
-            border-radius: 10px;
-            padding: 20px;
-        }
-.calc-section h3 {
-            color: #d4af37;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            border-bottom: 2px solid #2d3748;
-            padding-bottom: 10px;
-        }
-.calc-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 8px;
-            background: rgba(45, 55, 72, 0.3);
-            border-radius: 6px;
-        }
-.calc-row label {
-            font-size: 0.9em;
-            color: #cbd5e1;
-        }
-.calc-row input,.calc-row select {
-            background: #0a0e1a;
-            border: 1px solid #2d3748;
+.bonus-box {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid #a855f7;
+            padding: 10px;
             border-radius: 5px;
-            padding: 6px 10px;
-            color: #e8eaed;
-            width: 120px;
-            text-align: center;
+            margin-top: 8px;
+            font-size: 0.8em;
         }
-.calc-row input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+.bonus-box.mapa {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: #3b82f6;
         }
-.calc-row input:focus,.calc-row select:focus {
-            outline: none;
-            border-color: #d4af37;
-        }
-.calc-result {
-            background: linear-gradient(135deg, #1a1f35 0%, #2d1810 100%);
-            border: 3px solid #d4af37;
-            border-radius: 10px;
-            padding: 25px;
-            text-align: center;
-            margin-top: 20px;
-            grid-column: 1 / -1;
-        }
-.calc-result h2 {
-            color: #d4af37;
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-.calc-result.rate-final {
-            font-size: 3em;
-            color: #f57c00;
+.bonus-box strong { color: #a855f7; }
+.bonus-box.mapa strong { color: #3b82f6; }
+.bonus-highlight {
+            background: rgba(255, 167, 38, 0.25);
+            padding: 2px 6px;
+            border-radius: 3px;
             font-weight: bold;
-            text-shadow: 0 0 20px rgba(245, 124, 0, 0.5);
+            color: #ffa726;
         }
-.calc-result.details {
-            color: #cbd5e1;
-            margin-top: 15px;
-            font-size: 0.9em;
+.cartas-list {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid #d4af37;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 0.8em;
         }
-.bonus-total {
-            background: rgba(212, 175, 55, 0.2);
-            border: 2px solid #d4af37;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: center;
-            grid-column: 1 / -1;
+.cartas-list strong { color: #d4af37; }
+.itens-list {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 3px solid #3b82f6;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 0.8em;
         }
-.bonus-total strong {
-            color: #d4af37;
-            font-size: 1.3em;
-        }
-
+.itens-list strong { color: #3b82f6; }
+.counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; font-size: 0.9em; }
         @media (max-width: 768px) {
             h1 { font-size: 1.5em; }
-   .header-top { flex-direction: column; align-items: flex-start; }
-.cards-grid { grid-template-columns: 1fr; }
-.tab { padding: 12px 14px; font-size: 0.8em; }
-.filter-btns { width: 100%; }
-.btn-filter { flex: 1; font-size: 0.85em; }
-.calc-container { grid-template-columns: 1fr; }
+        .header-top { flex-direction: column; align-items: flex-start; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .tab { padding: 12px 16px; font-size: 0.85em; }
+    .filter-btns { width: 100%; }
+    .btn-filter { flex: 1; font-size: 0.85em; }
         }
     </style>
 </head>
@@ -343,12 +290,11 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active" data-tab="almas">📦 Almas e Coleções</div>
-        <div class="tab" data-tab="hats">🎩 HATS</div>
-        <div class="tab" data-tab="quests">📜 QUEST HATS</div>
-        <div class="tab" data-tab="colCarta">💜 COLEÇÕES CARTA</div>
-        <div class="tab" data-tab="colMapa">💙 COLEÇÕES MAPA</div>
-        <div class="tab" data-tab="calc">🎯 CALCULADORA DROP</div>
+        <div class="tab active" onclick="switchTab('almas')">📦 Almas e Coleções</div>
+        <div class="tab" onclick="switchTab('hats')">🎩 HATS</div>
+        <div class="tab" onclick="switchTab('quests')">📜 QUEST HATS</div>
+        <div class="tab" onclick="switchTab('colCarta')">💜 COLEÇÕES CARTA</div>
+        <div class="tab" onclick="switchTab('colMapa')">💙 COLEÇÕES MAPA</div>
     </div>
 
     <div class="container">
@@ -356,12 +302,12 @@
 
         <div id="almas-content">
             <div class="search-box">
-                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome, tipo ou efeito... ex: AGI, Critico, Dano">
+                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome, tipo ou efeito... ex: AGI, Critico, Dano" oninput="filterItems('almas')">
                 <div class="filter-btns">
-                    <button class="btn-filter active" data-filter="todas">Todas</button>
-                    <button class="btn-filter alma" data-filter="alma">ALMA</button>
-                    <button class="btn-filter mapa" data-filter="mapa">MAPA</button>
-                    <button class="btn-filter carta" data-filter="carta">CARTA</button>
+                    <button class="btn-filter active" onclick="filterType('todas')">Todas</button>
+                    <button class="btn-filter alma" onclick="filterType('alma')">ALMA</button>
+                    <button class="btn-filter mapa" onclick="filterType('mapa')">MAPA</button>
+                    <button class="btn-filter carta" onclick="filterType('carta')">CARTA</button>
                 </div>
             </div>
             <div class="counter" id="counterAlmas"></div>
@@ -370,8 +316,8 @@
 
         <div id="hats-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchHats" placeholder="🔍 Buscar hats por nome...">
-                <button class="btn-filter active" data-clear="hats">Todos</button>
+                <input type="text" id="searchHats" placeholder="🔍 Buscar hats por nome..." oninput="filterItems('hats')">
+                <button class="btn-filter active" onclick="clearSearch('hats')">Todos</button>
             </div>
             <div class="counter" id="counterHats"></div>
             <div id="hats-list" class="loading">Carregando hats...</div>
@@ -379,8 +325,8 @@
 
         <div id="quests-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchQuests" placeholder="🔍 Buscar quest por hat...">
-                <button class="btn-filter active" data-clear="quests">Todas</button>
+                <input type="text" id="searchQuests" placeholder="🔍 Buscar quest por hat..." oninput="filterItems('quests')">
+                <button class="btn-filter active" onclick="clearSearch('quests')">Todas</button>
             </div>
             <div class="counter" id="counterQuests"></div>
             <div id="quests-list" class="loading">Carregando quests...</div>
@@ -388,8 +334,8 @@
 
         <div id="colCarta-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchColCarta" placeholder="🔍 Buscar coleção de carta...">
-                <button class="btn-filter active" data-clear="colCarta">Todas</button>
+                <input type="text" id="searchColCarta" placeholder="🔍 Buscar coleção de carta..." oninput="filterItems('colCarta')">
+                <button class="btn-filter active" onclick="clearSearch('colCarta')">Todas</button>
             </div>
             <div class="counter" id="counterColCarta"></div>
             <div id="colCarta-list" class="loading">Carregando coleções de carta...</div>
@@ -397,127 +343,11 @@
 
         <div id="colMapa-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchColMapa" placeholder="🔍 Buscar coleção de mapa...">
-                <button class="btn-filter active" data-clear="colMapa">Todas</button>
+                <input type="text" id="searchColMapa" placeholder="🔍 Buscar coleção de mapa..." oninput="filterItems('colMapa')">
+                <button class="btn-filter active" onclick="clearSearch('colMapa')">Todas</button>
             </div>
             <div class="counter" id="counterColMapa"></div>
             <div id="colMapa-list" class="loading">Carregando coleções de mapa...</div>
-        </div>
-
-        <div id="calc-content" style="display: none;">
-            <div class="calc-container">
-                <div class="calc-section">
-                    <h3>📊 Dados do Personagem</h3>
-                    <div class="calc-row">
-                        <label>Rate do Personagem:</label>
-                        <select id="ratePersonagem">
-                            <option value="x1" selected>x1 (40%)</option>
-                            <option value="x3">x3 (15%)</option>
-                            <option value="x5">x5 (0%)</option>
-                        </select>
-                    </div>
-                    <div class="calc-row">
-                        <label>Goma de Mascar (+100%):</label>
-                        <input type="checkbox" id="goma">
-                    </div>
-                    <div class="calc-row">
-                        <label>Reborn (0-10):</label>
-                        <select id="reborn">
-                            <option value="0" selected>0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                    <div class="calc-row">
-                        <label>Visuais (%):</label>
-                        <input type="number" id="visuais" value="40" step="0.01">
-                    </div>
-                    <div class="calc-row">
-                        <label>Facção:</label>
-                        <select id="faccao">
-                            <option value="0">Nenhuma</option>
-                            <option value="35">Renegado (35%)</option>
-                            <option value="25">Aether (25%)</option>
-                            <option value="25">Tartaro (25%)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="calc-section">
-                    <h3>💜 Cartas Família Poring</h3>
-                    <div class="calc-row">
-                        <label>Quantidade:</label>
-                        <select id="qtdCartas">
-                            <option value="0">0 Cartas</option>
-                            <option value="1">1 Carta (+2%)</option>
-                            <option value="3">3 Cartas (+5%)</option>
-                            <option value="5">5 Cartas (+10%)</option>
-                        </select>
-                    </div>
-                    <div class="calc-row">
-                        <label>Alma Poporing (1%):</label>
-                        <input type="checkbox" id="almaPoporing">
-                    </div>
-                    <div class="calc-row">
-                        <label>Alma Poring (1%):</label>
-                        <input type="checkbox" id="almaPoring">
-                    </div>
-                    <div class="calc-row">
-                        <label>Alma Marin (3%):</label>
-                        <input type="checkbox" id="almaMarin">
-                    </div>
-                    <div class="calc-row">
-                        <label>Alma Ancient Mimic (5%):</label>
-                        <input type="checkbox" id="almaMimic">
-                    </div>
-                    <div class="calc-row">
-                        <label>Alma Mastering (10%):</label>
-                        <input type="checkbox" id="almaMastering">
-                    </div>
-                </div>
-
-                <div class="calc-section">
-                    <h3>🗺️ Mapas</h3>
-                    <div class="calc-row">
-                        <label>Arredores Fronteira (1% cada):</label>
-                        <input type="number" id="mapaArredores" value="0" min="0" max="8">
-                    </div>
-                    <div class="calc-row">
-                        <label>Campos Einbech (1% cada):</label>
-                        <input type="number" id="mapaCampos" value="0" min="0" max="10">
-                    </div>
-                </div>
-
-                <div class="calc-section">
-                    <h3>🎯 Item</h3>
-                    <div class="calc-row">
-                        <label>Rate Base do Item (%):</label>
-                        <input type="number" id="rateItem" value="0.6000" step="0.0001">
-                    </div>
-                </div>
-
-                <div class="bonus-total">
-                    <div>Total de Bônus de Drop:</div>
-                    <strong id="totalBonus">40,00%</strong>
-                </div>
-
-                <div class="calc-result">
-                    <h2>✅ RESULTADO</h2>
-                    <div class="rate-final" id="rateFinal">0,8400%</div>
-                    <div class="details" id="rateDetalhes">
-                        Drop Base: 0,6000%<br>
-                        1 drop a cada 119 mobs
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -536,41 +366,12 @@
             'https://api.allorigins.win/raw?url='
         ];
 
-        const REBORN_TABLE = {
-            0: { x1: 0, x35: 0 },
-            1: { x1: 6, x35: 4 },
-            2: { x1: 6, x35: 4 },
-            3: { x1: 8, x35: 6 },
-            4: { x1: 8, x35: 6 },
-            5: { x1: 10, x35: 8 },
-            6: { x1: 10, x35: 8 },
-            7: { x1: 13, x35: 10 },
-            8: { x1: 13, x35: 10 },
-            9: { x1: 15, x35: 12 },
-            10: { x1: 30, x35: 15 }
-        };
-
         let allData = [];
         let allHats = [];
         let allQuests = [];
         let allColCarta = [];
         let allColMapa = [];
         let currentFilter = 'todas';
-
-        // FIX: Função switchTab agora funciona
-        function switchTab(tab, el) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            
-            document.getElementById('almas-content').style.display = 'none';
-            document.getElementById('hats-content').style.display = 'none';
-            document.getElementById('quests-content').style.display = 'none';
-            document.getElementById('colCarta-content').style.display = 'none';
-            document.getElementById('colMapa-content').style.display = 'none';
-            document.getElementById('calc-content').style.display = 'none';
-            
-            document.getElementById(tab + '-content').style.display = 'block';
-        }
 
         async function fetchWithProxy(url) {
             let lastError;
@@ -607,7 +408,6 @@
                 renderQuests(allQuests);
                 renderColCarta(allColCarta);
                 renderColMapa(allColMapa);
-                calcularDrop();
             } catch (error) {
                 const msg = `<div class="error">
                     ❌ ${error.message}<br><br>
@@ -624,8 +424,8 @@
 
         function parseTSV(text) {
             return text.split('\n')
-.map(line => line.split('\t').map(cell => cell.trim()))
-.filter(row => row.some(cell => cell));
+        .map(line => line.split('\t').map(cell => cell.trim()))
+        .filter(row => row.some(cell => cell));
         }
 
         function renderAlmas(data) {
@@ -724,14 +524,176 @@
             const container = document.getElementById('colCarta-list');
             const counter = document.getElementById('counterColCarta');
 
+            // Agrupa por coluna B (Coleção)
             const grouped = {};
             data.slice(1).forEach(row => {
-                const colecao = row[1];
+                const colecao = row[1]; // Coluna B = Coleção
                 if (!colecao) return;
                 
                 if (!grouped[colecao]) {
                     grouped[colecao] = {
                         nome: colecao,
-                        bonus1: row[2],
-                        bonus3: row[4],
-                        bonus5: row[6
+                        bonus1: row[2] || '', // Coluna C = 1 Carta
+                        bonus3: row[3] || '', // Coluna D = 3 Cartas
+                        bonus5: row[4] || '', // Coluna E = 5 Cartas
+                        bonusFinal: row[5] || '', // Coluna F = Bônus Final
+                        cartas: []
+                    };
+                }
+                if (row[6]) grouped[colecao].cartas.push(row[6]); // Coluna G = Carta
+            });
+
+            const items = Object.values(grouped);
+            counter.textContent = `${items.length} Coleções de Carta encontradas`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhuma coleção encontrada</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(col => `
+                    <div class="card colecao-carta">
+                        <div class="card-tag carta">COLEÇÃO CARTA</div>
+                        <div class="card-title">💜 ${col.nome}</div>
+                        <div class="card-content">
+                            <div class="bonus-box">
+                                ${col.bonus1? `<div><span class="bonus-highlight">1ª Carta:</span> ${col.bonus1}</div>` : ''}
+                                ${col.bonus3? `<div><span class="bonus-highlight">3ª Carta:</span> ${col.bonus3}</div>` : ''}
+                                ${col.bonus5? `<div><span class="bonus-highlight">5ª Carta:</span> ${col.bonus5}</div>` : ''}
+                                ${col.bonusFinal? `<div style="margin-top:5px"><strong>Bônus Final:</strong> ${col.bonusFinal}</div>` : ''}
+                            </div>
+                            ${col.cartas.length > 0? `<div class="cartas-list"><strong>Cartas:</strong><br>${col.cartas.join(', ')}</div>` : ''}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>`;
+        }
+
+        function renderColMapa(data) {
+            const container = document.getElementById('colMapa-list');
+            const counter = document.getElementById('counterColMapa');
+
+            // Agrupa por coluna B (Mapa)
+            const grouped = {};
+            data.slice(1).forEach(row => {
+                const mapa = row[1]; // Coluna B = Mapa
+                if (!mapa) return;
+                
+                if (!grouped[mapa]) {
+                    grouped[mapa] = {
+                        nome: mapa,
+                        cidade: row[0] || '', // Coluna A = Cidade
+                        bonus: row[2] || '', // Coluna C = Bônus
+                        itens: []
+                    };
+                }
+                if (row[3]) { // Coluna D = Item
+                    grouped[mapa].itens.push(`${row[3]} ${row[4]? `(${row[4]}x)` : ''}`); // Coluna E = Quantidade
+                }
+            });
+
+            const items = Object.values(grouped);
+            counter.textContent = `${items.length} Coleções de Mapa encontradas`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhuma coleção encontrada</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(col => `
+                    <div class="card colecao-mapa">
+                        <div class="card-tag mapa">COLEÇÃO MAPA</div>
+                        <div class="card-title">💙 ${col.nome}</div>
+                        <div class="card-content">
+                            <strong>Cidade:</strong> ${col.cidade}<br>
+                            ${col.bonus? `<div class="bonus-box mapa"><strong>Bônus:</strong> ${col.bonus}</div>` : ''}
+                            ${col.itens.length > 0? `<div class="itens-list"><strong>Itens necessários:</strong><br>${col.itens.join('<br>')}</div>` : ''}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>`;
+        }
+
+        function filterType(tipo) {
+            currentFilter = tipo;
+            document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderAlmas(allData);
+        }
+
+        function filterItems(type) {
+            const searchTerm = document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value.toLowerCase();
+
+            if (type === 'almas') {
+                if (!searchTerm && currentFilter === 'todas') {
+                    renderAlmas(allData);
+                    return;
+                }
+                const filtered = allData.filter(row => {
+                    const tipo = row[0]?.toUpperCase();
+                    if (!['ALMA', 'MAPA', 'CARTA'].includes(tipo)) return false;
+                    if (currentFilter!== 'todas' && tipo!== currentFilter.toUpperCase()) return false;
+                    return row[1]?.toLowerCase().includes(searchTerm) || row[2]?.toLowerCase().includes(searchTerm);
+                });
+                renderAlmas(filtered);
+            } else if (type === 'hats') {
+                if (!searchTerm) {
+                    renderHats(allHats);
+                    return;
+                }
+                const filtered = allHats.filter(row =>
+                    row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
+                );
+                renderHats(filtered);
+            } else if (type === 'quests') {
+                if (!searchTerm) {
+                    renderQuests(allQuests);
+                    return;
+                }
+                const filtered = allQuests.filter(row =>
+                    row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
+                );
+                renderQuests(filtered);
+            } else if (type === 'colCarta') {
+                if (!searchTerm) {
+                    renderColCarta(allColCarta);
+                    return;
+                }
+                const filtered = allColCarta.filter(row =>
+                    row[1]?.toLowerCase().includes(searchTerm) || row.slice(2).some(c => c?.toLowerCase().includes(searchTerm))
+                );
+                renderColCarta(filtered);
+            } else if (type === 'colMapa') {
+                if (!searchTerm) {
+                    renderColMapa(allColMapa);
+                    return;
+                }
+                const filtered = allColMapa.filter(row =>
+                    row[1]?.toLowerCase().includes(searchTerm) || row.slice(2).some(c => c?.toLowerCase().includes(searchTerm))
+                );
+                renderColMapa(filtered);
+            }
+        }
+
+        function clearSearch(type) {
+            document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value = '';
+            filterItems(type);
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('almas-content').style.display = tab === 'almas'? 'block' : 'none';
+            document.getElementById('hats-content').style.display = tab === 'hats'? 'block' : 'none';
+            document.getElementById('quests-content').style.display = tab === 'quests'? 'block' : 'none';
+            document.getElementById('colCarta-content').style.display = tab === 'colCarta'? 'block' : 'none';
+            document.getElementById('colMapa-content').style.display = tab === 'colMapa'? 'block' : 'none';
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
