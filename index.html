@@ -382,12 +382,12 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="switchTab('almas')">📦 Almas e Coleções</div>
-        <div class="tab" onclick="switchTab('hats')">🎩 HATS</div>
-        <div class="tab" onclick="switchTab('quests')">📜 QUEST HATS</div>
-        <div class="tab" onclick="switchTab('colCarta')">💜 COLEÇÕES CARTA</div>
-        <div class="tab" onclick="switchTab('colMapa')">💙 COLEÇÕES MAPA</div>
-        <div class="tab" onclick="switchTab('calc')">🎯 CALCULADORA DROP</div>
+        <div class="tab active" onclick="switchTab('almas', this)">📦 Almas e Coleções</div>
+        <div class="tab" onclick="switchTab('hats', this)">🎩 HATS</div>
+        <div class="tab" onclick="switchTab('quests', this)">📜 QUEST HATS</div>
+        <div class="tab" onclick="switchTab('colCarta', this)">💜 COLEÇÕES CARTA</div>
+        <div class="tab" onclick="switchTab('colMapa', this)">💙 COLEÇÕES MAPA</div>
+        <div class="tab" onclick="switchTab('calc', this)">🎯 CALCULADORA DROP</div>
     </div>
 
     <div class="container">
@@ -597,7 +597,7 @@
         let allColMapa = [];
         let currentFilter = 'todas';
 
-        // CORRIGIDO: switchTab agora recebe o elemento como parâmetro
+        // CORRIGIDO: Função switchTab agora existe
         function switchTab(tab, el) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
@@ -664,8 +664,8 @@
 
         function parseTSV(text) {
             return text.split('\n')
-    .map(line => line.split('\t').map(cell => cell.trim()))
-    .filter(row => row.some(cell => cell));
+  .map(line => line.split('\t').map(cell => cell.trim()))
+  .filter(row => row.some(cell => cell));
         }
 
         function renderAlmas(data) {
@@ -722,8 +722,4 @@
                         <div class="card quest">
                             <div class="card-tag hat">HAT</div>
                             <div class="card-title">🎩 ${hatName}</div>
-                            <div class="card-content">${hatInfo || 'Sem descrição'}</div>
-                        </div>
-                    `;
-                }).join('')}
-            </
+                            <div class
