@@ -370,9 +370,49 @@
             <div class="counter" id="counterColMapa"></div>
             <div id="colMapa-list" class="loading">Carregando coleções de mapa...</div>
         </div>
+
+        <div id="calc-content" style="display: none;">
+            <div class="calc-container">
+                <div class="calc-section">
+                    <h3>📊 Personagem</h3>
+                    <div class="calc-row"><label>Rate do Personagem</label><select id="ratePersonagem"><option value="40">x1 = 40%</option><option value="15">x3 = 15%</option><option value="0">x5 = 0%</option></select></div>
+                    <div class="calc-row"><label>Goma de Mascar</label><select id="goma"><option value="0">Não = 0%</option><option value="100">Sim = 100%</option></select></div>
+                    <div class="calc-row"><label>Reborn</label><select id="reborn"><option value="0">0 - 0% / 0%</option><option value="1">1 - 6% / 4%</option><option value="2">2 - 6% / 4%</option><option value="3">3 - 8% / 6%</option><option value="4">4 - 8% / 6%</option><option value="5">5 - 10% / 8%</option><option value="6">6 - 10% / 8%</option><option value="7">7 - 13% / 10%</option><option value="8">8 - 13% / 10%</option><option value="9">9 - 15% / 12%</option><option value="10">10 - 30% / 15%</option></select></div>
+                    <div class="calc-row"><label>Facção</label><select id="faccao"><option value="0">Nenhuma = 0%</option><option value="35">Renegado = 35%</option><option value="25">Tartaro = 25%</option><option value="25">Aether = 25%</option></select></div>
+                    <div class="calc-row"><label>Visuais (%)</label><input type="number" id="visuais" value="0" step="0.01" placeholder="Ex: 40"></div>
+                </div>
+                <div class="calc-section">
+                    <h3>👻 Almas</h3>
+                    <div class="calc-row"><label>Alma Poporing</label><select id="almaPoporing"><option value="0">Não = 0%</option><option value="1">Sim = 1%</option></select></div>
+                    <div class="calc-row"><label>Alma Poring</label><select id="almaPoring"><option value="0">Não = 0%</option><option value="1">Sim = 1%</option></select></div>
+                    <div class="calc-row"><label>Alma Marin</label><select id="almaMarin"><option value="0">Não = 0%</option><option value="3">Sim = 3%</option></select></div>
+                    <div class="calc-row"><label>Alma Ancient Mimic</label><select id="almaAncient"><option value="0">Não = 0%</option><option value="5">Sim = 5%</option></select></div>
+                    <div class="calc-row"><label>Alma Mastering</label><select id="almaMastering"><option value="0">Não = 0%</option><option value="10">Sim = 10%</option></select></div>
+                </div>
+                <div class="calc-section">
+                    <h3>💜 Cartas & Mapas</h3>
+                    <div class="calc-row"><label>Carta Familia Poring</label><select id="cartaPoring"><option value="0">0 = 0%</option><option value="2">1º = 2%</option><option value="5">3º = 5%</option><option value="10">5º = 10%</option></select></div>
+                    <div class="calc-row"><label>Mapa Arredores Prontera (8)</label><select id="mapaArredores"><option value="0">Não = 0%</option><option value="1">Sim = 1%</option></select></div>
+                    <div class="calc-row"><label>Mapa Campos Einbech (10)</label><select id="mapaCampos"><option value="0">Não = 0%</option><option value="1">Sim = 1%</option></select></div>
+                </div>
+                <div class="calc-section">
+                    <h3>🎯 Item</h3>
+                    <div class="calc-row"><label>Rate do Item &gt; (%)</label><input type="number" id="rateItem" value="0.6000" step="0.0001"></div>
+                    <div style="font-size:0.85em;color:#94a3b8;margin-top:10px;">Fórmula: <strong>Rate c/ Bonus = Rate + (Rate * Bonus Total)</strong></div>
+                </div>
+                <div class="bonus-total-box"><span>Total de Bonus</span><strong id="totalBonus">0,00%</strong><div style="font-size:0.8em;color:#94a3b8;margin-top:5px;">Soma de todos os bonus acima</div></div>
+                <div class="calc-result"><h2>✅ Rate do item c/ Bonus &gt;</h2><div class="rate-final" id="rateFinal">0,0000%</div><div class="rate-details" id="rateDetalhes">Drop Base: 0,0000%<br>1 drop a cada ∞ mobs</div></div>
+            </div>
+        </div>
+
     </div>
 
     <script>
+
+        function norm(str){
+            return (str||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        }
+
         const SHEETS = {
             almas: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=542113926&single=true&output=tsv',
             hats: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=242749534&single=true&output=tsv',
@@ -645,7 +685,8 @@
         }
 
         function filterItems(type) {
-            const searchTerm = document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value.toLowerCase();
+            const raw = document.getElementById(`search${type.charAt(0).toUpperCase() + type.slice(1)}`).value;
+            const searchTerm = norm(raw);
 
             if (type === 'almas') {
                 if (!searchTerm && currentFilter === 'todas') {
@@ -656,7 +697,7 @@
                     const tipo = row[0]?.toUpperCase();
                     if (!['ALMA', 'MAPA', 'CARTA'].includes(tipo)) return false;
                     if (currentFilter!== 'todas' && tipo!== currentFilter.toUpperCase()) return false;
-                    return row[1]?.toLowerCase().includes(searchTerm) || row[2]?.toLowerCase().includes(searchTerm);
+                    return norm(row[1]).includes(searchTerm) || norm(row[2]).includes(searchTerm);
                 });
                 renderAlmas(filtered);
             } else if (type === 'hats') {
@@ -665,7 +706,7 @@
                     return;
                 }
                 const filtered = allHats.filter(row =>
-                    row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
+                    norm(row[0]).includes(searchTerm) || row.slice(1).some(c => norm(c).includes(searchTerm))
                 );
                 renderHats(filtered);
             } else if (type === 'quests') {
@@ -674,7 +715,7 @@
                     return;
                 }
                 const filtered = allQuests.filter(row =>
-                    row[0]?.toLowerCase().includes(searchTerm) || row.slice(1).some(c => c.toLowerCase().includes(searchTerm))
+                    norm(row[0]).includes(searchTerm) || row.slice(1).some(c => norm(c).includes(searchTerm))
                 );
                 renderQuests(filtered);
             } else if (type === 'colCarta') {
@@ -683,7 +724,7 @@
                     return;
                 }
                 const filtered = allColCarta.filter(row =>
-                    row[1]?.toLowerCase().includes(searchTerm) || row.slice(2).some(c => c?.toLowerCase().includes(searchTerm))
+                    norm(row[1]).includes(searchTerm) || row.slice(2).some(c => norm(c).includes(searchTerm))
                 );
                 renderColCarta(filtered);
             } else if (type === 'colMapa') {
@@ -692,7 +733,7 @@
                     return;
                 }
                 const filtered = allColMapa.filter(row =>
-                    row[1]?.toLowerCase().includes(searchTerm) || row.slice(2).some(c => c?.toLowerCase().includes(searchTerm))
+                    norm(row[1]).includes(searchTerm) || row.slice(2).some(c => norm(c).includes(searchTerm))
                 );
                 renderColMapa(filtered);
             }
@@ -705,14 +746,16 @@
 
         function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            if (window.event && window.event.target) window.event.target.classList.add('active');
+            else document.querySelectorAll('.tab').forEach(function(el){ if(el.getAttribute('onclick') && el.getAttribute('onclick').includes("'"+tab+"'")) el.classList.add('active'); });
 
             document.getElementById('almas-content').style.display = tab === 'almas'? 'block' : 'none';
             document.getElementById('hats-content').style.display = tab === 'hats'? 'block' : 'none';
             document.getElementById('quests-content').style.display = tab === 'quests'? 'block' : 'none';
             document.getElementById('colCarta-content').style.display = tab === 'colCarta'? 'block' : 'none';
             document.getElementById('colMapa-content').style.display = tab === 'colMapa'? 'block' : 'none';
-            document.getElementById('calc-content').style.display = tab === 'calc'? 'block' : 'none';
+            var calcEl = document.getElementById('calc-content');
+            if (calcEl) calcEl.style.display = tab === 'calc'? 'block' : 'none';
             if(tab==='calc') calcularDrop();
         }
 
@@ -741,7 +784,7 @@
                 document.getElementById('rateFinal').textContent = rateFinal.toFixed(4).replace('.',',') + '%';
                 var mobs = rateFinal>0 ? Math.round(100/rateFinal) : 0;
                 document.getElementById('rateDetalhes').innerHTML = 'Drop Base: ' + rateItem.toFixed(4).replace('.',',') + '%<br>1 drop a cada ' + (mobs>0? mobs.toLocaleString('pt-BR') : '∞') + ' mobs<br>Total Bonus: ' + total.toFixed(2).replace('.',',') + '%';
-            }catch(e){ console.error(e); }
+            }catch(e){ console.error('calc error', e); }
         }
         document.addEventListener('DOMContentLoaded', function(){
             var ids=['ratePersonagem','goma','reborn','faccao','visuais','almaPoporing','almaPoring','almaMarin','almaAncient','almaMastering','cartaPoring','mapaArredores','mapaCampos','rateItem'];
