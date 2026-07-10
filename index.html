@@ -218,45 +218,6 @@
             font-size: 0.85em;
         }
 .card-content strong { color: #ffa726; }
-.bonus-box {
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid #a855f7;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-.bonus-box.mapa {
-            background: rgba(59, 130, 246, 0.15);
-            border-color: #3b82f6;
-        }
-.bonus-box strong { color: #a855f7; }
-.bonus-box.mapa strong { color: #3b82f6; }
-.bonus-highlight {
-            background: rgba(255, 167, 38, 0.25);
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-weight: bold;
-            color: #ffa726;
-        }
-.cartas-list {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 3px solid #d4af37;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-.cartas-list strong { color: #d4af37; }
-.itens-list {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 3px solid #3b82f6;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-.itens-list strong { color: #3b82f6; }
 .counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; font-size: 0.9em; }
 
 /* CALCULADORA DROP */
@@ -382,12 +343,12 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="switchTab('almas', this)">📦 Almas e Coleções</div>
-        <div class="tab" onclick="switchTab('hats', this)">🎩 HATS</div>
-        <div class="tab" onclick="switchTab('quests', this)">📜 QUEST HATS</div>
-        <div class="tab" onclick="switchTab('colCarta', this)">💜 COLEÇÕES CARTA</div>
-        <div class="tab" onclick="switchTab('colMapa', this)">💙 COLEÇÕES MAPA</div>
-        <div class="tab" onclick="switchTab('calc', this)">🎯 CALCULADORA DROP</div>
+        <div class="tab active" data-tab="almas">📦 Almas e Coleções</div>
+        <div class="tab" data-tab="hats">🎩 HATS</div>
+        <div class="tab" data-tab="quests">📜 QUEST HATS</div>
+        <div class="tab" data-tab="colCarta">💜 COLEÇÕES CARTA</div>
+        <div class="tab" data-tab="colMapa">💙 COLEÇÕES MAPA</div>
+        <div class="tab" data-tab="calc">🎯 CALCULADORA DROP</div>
     </div>
 
     <div class="container">
@@ -395,12 +356,12 @@
 
         <div id="almas-content">
             <div class="search-box">
-                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome, tipo ou efeito... ex: AGI, Critico, Dano" oninput="filterItems('almas')">
+                <input type="text" id="searchAlmas" placeholder="🔍 Buscar por nome, tipo ou efeito... ex: AGI, Critico, Dano">
                 <div class="filter-btns">
-                    <button class="btn-filter active" onclick="filterType('todas')">Todas</button>
-                    <button class="btn-filter alma" onclick="filterType('alma')">ALMA</button>
-                    <button class="btn-filter mapa" onclick="filterType('mapa')">MAPA</button>
-                    <button class="btn-filter carta" onclick="filterType('carta')">CARTA</button>
+                    <button class="btn-filter active" data-filter="todas">Todas</button>
+                    <button class="btn-filter alma" data-filter="alma">ALMA</button>
+                    <button class="btn-filter mapa" data-filter="mapa">MAPA</button>
+                    <button class="btn-filter carta" data-filter="carta">CARTA</button>
                 </div>
             </div>
             <div class="counter" id="counterAlmas"></div>
@@ -409,8 +370,8 @@
 
         <div id="hats-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchHats" placeholder="🔍 Buscar hats por nome..." oninput="filterItems('hats')">
-                <button class="btn-filter active" onclick="clearSearch('hats')">Todos</button>
+                <input type="text" id="searchHats" placeholder="🔍 Buscar hats por nome...">
+                <button class="btn-filter active" data-clear="hats">Todos</button>
             </div>
             <div class="counter" id="counterHats"></div>
             <div id="hats-list" class="loading">Carregando hats...</div>
@@ -418,8 +379,8 @@
 
         <div id="quests-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchQuests" placeholder="🔍 Buscar quest por hat..." oninput="filterItems('quests')">
-                <button class="btn-filter active" onclick="clearSearch('quests')">Todas</button>
+                <input type="text" id="searchQuests" placeholder="🔍 Buscar quest por hat...">
+                <button class="btn-filter active" data-clear="quests">Todas</button>
             </div>
             <div class="counter" id="counterQuests"></div>
             <div id="quests-list" class="loading">Carregando quests...</div>
@@ -427,8 +388,8 @@
 
         <div id="colCarta-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchColCarta" placeholder="🔍 Buscar coleção de carta..." oninput="filterItems('colCarta')">
-                <button class="btn-filter active" onclick="clearSearch('colCarta')">Todas</button>
+                <input type="text" id="searchColCarta" placeholder="🔍 Buscar coleção de carta...">
+                <button class="btn-filter active" data-clear="colCarta">Todas</button>
             </div>
             <div class="counter" id="counterColCarta"></div>
             <div id="colCarta-list" class="loading">Carregando coleções de carta...</div>
@@ -436,8 +397,8 @@
 
         <div id="colMapa-content" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchColMapa" placeholder="🔍 Buscar coleção de mapa..." oninput="filterItems('colMapa')">
-                <button class="btn-filter active" onclick="clearSearch('colMapa')">Todas</button>
+                <input type="text" id="searchColMapa" placeholder="🔍 Buscar coleção de mapa...">
+                <button class="btn-filter active" data-clear="colMapa">Todas</button>
             </div>
             <div class="counter" id="counterColMapa"></div>
             <div id="colMapa-list" class="loading">Carregando coleções de mapa...</div>
@@ -449,7 +410,7 @@
                     <h3>📊 Dados do Personagem</h3>
                     <div class="calc-row">
                         <label>Rate do Personagem:</label>
-                        <select id="ratePersonagem" onchange="calcularDrop()">
+                        <select id="ratePersonagem">
                             <option value="x1" selected>x1 (40%)</option>
                             <option value="x3">x3 (15%)</option>
                             <option value="x5">x5 (0%)</option>
@@ -457,11 +418,11 @@
                     </div>
                     <div class="calc-row">
                         <label>Goma de Mascar (+100%):</label>
-                        <input type="checkbox" id="goma" onchange="calcularDrop()">
+                        <input type="checkbox" id="goma">
                     </div>
                     <div class="calc-row">
                         <label>Reborn (0-10):</label>
-                        <select id="reborn" onchange="calcularDrop()">
+                        <select id="reborn">
                             <option value="0" selected>0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -477,11 +438,11 @@
                     </div>
                     <div class="calc-row">
                         <label>Visuais (%):</label>
-                        <input type="number" id="visuais" value="40" step="0.01" onchange="calcularDrop()">
+                        <input type="number" id="visuais" value="40" step="0.01">
                     </div>
                     <div class="calc-row">
                         <label>Facção:</label>
-                        <select id="faccao" onchange="calcularDrop()">
+                        <select id="faccao">
                             <option value="0">Nenhuma</option>
                             <option value="35">Renegado (35%)</option>
                             <option value="25">Aether (25%)</option>
@@ -494,7 +455,7 @@
                     <h3>💜 Cartas Família Poring</h3>
                     <div class="calc-row">
                         <label>Quantidade:</label>
-                        <select id="qtdCartas" onchange="calcularDrop()">
+                        <select id="qtdCartas">
                             <option value="0">0 Cartas</option>
                             <option value="1">1 Carta (+2%)</option>
                             <option value="3">3 Cartas (+5%)</option>
@@ -503,23 +464,23 @@
                     </div>
                     <div class="calc-row">
                         <label>Alma Poporing (1%):</label>
-                        <input type="checkbox" id="almaPoporing" onchange="calcularDrop()">
+                        <input type="checkbox" id="almaPoporing">
                     </div>
                     <div class="calc-row">
                         <label>Alma Poring (1%):</label>
-                        <input type="checkbox" id="almaPoring" onchange="calcularDrop()">
+                        <input type="checkbox" id="almaPoring">
                     </div>
                     <div class="calc-row">
                         <label>Alma Marin (3%):</label>
-                        <input type="checkbox" id="almaMarin" onchange="calcularDrop()">
+                        <input type="checkbox" id="almaMarin">
                     </div>
                     <div class="calc-row">
                         <label>Alma Ancient Mimic (5%):</label>
-                        <input type="checkbox" id="almaMimic" onchange="calcularDrop()">
+                        <input type="checkbox" id="almaMimic">
                     </div>
                     <div class="calc-row">
                         <label>Alma Mastering (10%):</label>
-                        <input type="checkbox" id="almaMastering" onchange="calcularDrop()">
+                        <input type="checkbox" id="almaMastering">
                     </div>
                 </div>
 
@@ -527,11 +488,11 @@
                     <h3>🗺️ Mapas</h3>
                     <div class="calc-row">
                         <label>Arredores Fronteira (1% cada):</label>
-                        <input type="number" id="mapaArredores" value="0" min="0" max="8" onchange="calcularDrop()">
+                        <input type="number" id="mapaArredores" value="0" min="0" max="8">
                     </div>
                     <div class="calc-row">
                         <label>Campos Einbech (1% cada):</label>
-                        <input type="number" id="mapaCampos" value="0" min="0" max="10" onchange="calcularDrop()">
+                        <input type="number" id="mapaCampos" value="0" min="0" max="10">
                     </div>
                 </div>
 
@@ -539,7 +500,7 @@
                     <h3>🎯 Item</h3>
                     <div class="calc-row">
                         <label>Rate Base do Item (%):</label>
-                        <input type="number" id="rateItem" value="0.6000" step="0.0001" onchange="calcularDrop()">
+                        <input type="number" id="rateItem" value="0.6000" step="0.0001">
                     </div>
                 </div>
 
@@ -597,10 +558,10 @@
         let allColMapa = [];
         let currentFilter = 'todas';
 
-        // CORRIGIDO: Função switchTab agora existe
-        function switchTab(tab, el) {
+        // FIX: Função switchTab agora funciona
+        function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
             
             document.getElementById('almas-content').style.display = 'none';
             document.getElementById('hats-content').style.display = 'none';
@@ -722,4 +683,67 @@
                         <div class="card quest">
                             <div class="card-tag hat">HAT</div>
                             <div class="card-title">🎩 ${hatName}</div>
-                            <div class
+                            <div class="card-content">${hatInfo || 'Sem descrição'}</div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>`;
+        }
+
+        function renderQuests(data) {
+            const container = document.getElementById('quests-list');
+            const counter = document.getElementById('counterQuests');
+
+            const items = data.slice(1).filter(row => row[0]);
+            counter.textContent = `${items.length} Quests encontradas`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhuma quest encontrada</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(row => {
+                    const hatName = row[0];
+                    const custo = row[2] || '0';
+                    const ingredientes = row.slice(3).filter(Boolean);
+                    return `
+                        <div class="card quest">
+                            <div class="card-tag quest">QUEST</div>
+                            <div class="card-title">📜 ${hatName}</div>
+                            <div class="card-content">
+                                <strong>Custo:</strong> ${custo} Zeny<br>
+                                ${ingredientes.length > 0? `<div class="bonus-box"><strong>Ingredientes:</strong><br>${ingredientes.join('<br>')}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>`;
+        }
+
+        function renderColCarta(data) {
+            const container = document.getElementById('colCarta-list');
+            const counter = document.getElementById('counterColCarta');
+
+            const grouped = {};
+            data.slice(1).forEach(row => {
+                const colecao = row[1];
+                if (!colecao) return;
+                
+                if (!grouped[colecao]) {
+                    grouped[colecao] = {
+                        nome: colecao,
+                        bonus1: row[2],
+                        bonus3: row[4],
+                        bonus5: row[6],
+                        cartas: []
+                    };
+                }
+                grouped[colecao].cartas.push({ nome: row[8], tipo: row[7] });
+            });
+
+            const items = Object.values(grouped);
+            counter.textContent = `${items.length} Coleções de Carta`;
+
+            if (items.length === 0) {
+                container.innerHTML
