@@ -351,12 +351,12 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 1.5em; }
-      .header-top { flex-direction: column; align-items: flex-start; }
-  .cards-grid { grid-template-columns: 1fr; }
-  .tab { padding: 12px 14px; font-size: 0.8em; }
-  .filter-btns { width: 100%; }
-  .btn-filter { flex: 1; font-size: 0.85em; }
-  .calc-container { grid-template-columns: 1fr; }
+     .header-top { flex-direction: column; align-items: flex-start; }
+ .cards-grid { grid-template-columns: 1fr; }
+ .tab { padding: 12px 14px; font-size: 0.8em; }
+ .filter-btns { width: 100%; }
+ .btn-filter { flex: 1; font-size: 0.85em; }
+ .calc-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -502,23 +502,23 @@
                         </select>
                     </div>
                     <div class="calc-row">
-                        <label>Alma Poporing:</label>
+                        <label>Alma Poporing (1%):</label>
                         <input type="checkbox" id="almaPoporing" onchange="calcularDrop()">
                     </div>
                     <div class="calc-row">
-                        <label>Alma Poring:</label>
+                        <label>Alma Poring (1%):</label>
                         <input type="checkbox" id="almaPoring" onchange="calcularDrop()">
                     </div>
                     <div class="calc-row">
-                        <label>Alma Marin:</label>
+                        <label>Alma Marin (3%):</label>
                         <input type="checkbox" id="almaMarin" onchange="calcularDrop()">
                     </div>
                     <div class="calc-row">
-                        <label>Alma Ancient Mimic:</label>
+                        <label>Alma Ancient Mimic (5%):</label>
                         <input type="checkbox" id="almaMimic" onchange="calcularDrop()">
                     </div>
                     <div class="calc-row">
-                        <label>Alma Mastering:</label>
+                        <label>Alma Mastering (10%):</label>
                         <input type="checkbox" id="almaMastering" onchange="calcularDrop()">
                     </div>
                 </div>
@@ -526,11 +526,11 @@
                 <div class="calc-section">
                     <h3>🗺️ Mapas</h3>
                     <div class="calc-row">
-                        <label>Arredores Fronteira:</label>
+                        <label>Arredores Fronteira (1% cada):</label>
                         <input type="number" id="mapaArredores" value="0" min="0" max="8" onchange="calcularDrop()">
                     </div>
                     <div class="calc-row">
-                        <label>Campos Einbech:</label>
+                        <label>Campos Einbech (1% cada):</label>
                         <input type="number" id="mapaCampos" value="0" min="0" max="10" onchange="calcularDrop()">
                     </div>
                 </div>
@@ -597,6 +597,21 @@
         let allColMapa = [];
         let currentFilter = 'todas';
 
+        // CORRIGIDO: switchTab agora recebe o elemento como parâmetro
+        function switchTab(tab, el) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            
+            document.getElementById('almas-content').style.display = 'none';
+            document.getElementById('hats-content').style.display = 'none';
+            document.getElementById('quests-content').style.display = 'none';
+            document.getElementById('colCarta-content').style.display = 'none';
+            document.getElementById('colMapa-content').style.display = 'none';
+            document.getElementById('calc-content').style.display = 'none';
+            
+            document.getElementById(tab + '-content').style.display = 'block';
+        }
+
         async function fetchWithProxy(url) {
             let lastError;
             for (const proxy of PROXIES) {
@@ -649,8 +664,8 @@
 
         function parseTSV(text) {
             return text.split('\n')
-     .map(line => line.split('\t').map(cell => cell.trim()))
-     .filter(row => row.some(cell => cell));
+    .map(line => line.split('\t').map(cell => cell.trim()))
+    .filter(row => row.some(cell => cell));
         }
 
         function renderAlmas(data) {
@@ -711,30 +726,4 @@
                         </div>
                     `;
                 }).join('')}
-            </div>`;
-        }
-
-        function renderQuests(data) {
-            const container = document.getElementById('quests-list');
-            const counter = document.getElementById('counterQuests');
-
-            const items = data.slice(1).filter(row => row[0]);
-            counter.textContent = `${items.length} Quests encontradas`;
-
-            if (items.length === 0) {
-                container.innerHTML = '<div class="error">Nenhuma quest encontrada</div>';
-                return;
-            }
-
-            container.innerHTML = `<div class="cards-grid">
-                ${items.map(row => {
-                    const hatName = row[0];
-                    const custo = row[2] || '0';
-                    const ingredientes = row.slice(3).filter(Boolean);
-                    return `
-                        <div class="card quest">
-                            <div class="card-tag quest">QUEST</div>
-                            <div class="card-title">📜 ${hatName}</div>
-                            <div class="card-content">
-                                <strong>Custo:</strong> ${custo} Zeny<br>
-                                ${ingredientes.length > 0? `<div class="
+            </
