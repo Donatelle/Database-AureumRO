@@ -349,12 +349,12 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 1.5em; }
-       .header-top { flex-direction: column; align-items: flex-start; }
-   .cards-grid { grid-template-columns: 1fr; }
-   .tab { padding: 12px 14px; font-size: 0.8em; }
-   .filter-btns { width: 100%; }
-   .btn-filter { flex: 1; font-size: 0.85em; }
-   .calc-container { grid-template-columns: 1fr; }
+      .header-top { flex-direction: column; align-items: flex-start; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .tab { padding: 12px 14px; font-size: 0.8em; }
+  .filter-btns { width: 100%; }
+  .btn-filter { flex: 1; font-size: 0.85em; }
+  .calc-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -446,19 +446,11 @@
                 <div class="calc-section">
                     <h3>📊 Dados do Personagem</h3>
                     <div class="calc-row">
-                        <label>Rate do Personagem (0-10):</label>
+                        <label>Rate do Personagem:</label>
                         <select id="ratePersonagem" onchange="calcularDrop()">
-                            <option value="0">0</option>
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
+                            <option value="x1" selected>x1 (40%)</option>
+                            <option value="x3">x3 (15%)</option>
+                            <option value="x5">x5 (0%)</option>
                         </select>
                     </div>
                     <div class="calc-row">
@@ -482,7 +474,7 @@
                         </select>
                     </div>
                     <div class="calc-row">
-                        <label>Visuais:</label>
+                        <label>Visuais (%):</label>
                         <input type="number" id="visuais" value="40" step="0.01" onchange="calcularDrop()">
                     </div>
                 </div>
@@ -515,15 +507,15 @@
 
             <div class="bonus-total">
                 <div>Total de Bônus de Drop:</div>
-                <strong id="totalBonus">215,00%</strong>
+                <strong id="totalBonus">0,00%</strong>
             </div>
 
             <div class="calc-result">
                 <h2>✅ RESULTADO</h2>
-                <div class="rate-final" id="rateFinal">1,8900%</div>
+                <div class="rate-final" id="rateFinal">0,0000%</div>
                 <div class="details" id="rateDetalhes">
-                    Drop Base: 0,6000%<br>
-                    1 drop a cada 53 mobs
+                    Drop Base: 0,0000%<br>
+                    1 drop a cada 0 mobs
                 </div>
             </div>
         </div>
@@ -538,10 +530,14 @@
             colMapa: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=328982155&single=true&output=tsv'
         };
 
+        // 6 proxies diferentes pra garantir
         const PROXIES = [
+            'https://api.allorigins.win/raw?url=',
             'https://corsproxy.io/?',
             'https://api.codetabs.com/v1/proxy?quest=',
-            'https://api.allorigins.win/raw?url='
+            'https://thingproxy.freeboard.io/fetch/',
+            'https://cors-anywhere.herokuapp.com/',
+            'https://proxy.cors.sh/'
         ];
 
         // Tabela de Reborn - coluna E (x1) e F (x3/x5)
@@ -567,21 +563,32 @@
         let currentFilter = 'todas';
 
         async function fetchWithProxy(url) {
-            let lastError;
-            for (const proxy of PROXIES) {
+            const errors = [];
+            for (let i = 0; i < PROXIES.length; i++) {
                 try {
-                    const res = await fetch(proxy + encodeURIComponent(url));
-                    if (res.ok) return await res.text();
+                    console.log(`Tentando proxy ${i + 1}/${PROXIES.length}: ${PROXIES[i]}`);
+                    const res = await fetch(PROXIES[i] + encodeURIComponent(url), {
+                        method: 'GET',
+                        headers: { 'Accept': 'text/plain' }
+                    });
+                    if (res.ok) {
+                        const text = await res.text();
+                        console.log(`✅ Proxy ${i + 1} funcionou!`);
+                        return text;
+                    }
+                    errors.push(`Proxy ${i + 1}: ${res.status}`);
                 } catch (e) {
-                    lastError = e;
+                    errors.push(`Proxy ${i + 1}: ${e.message}`);
+                    console.log(`❌ Proxy ${i + 1} falhou:`, e.message);
                     continue;
                 }
             }
-            throw new Error(`Falha ao carregar. Verifica se a planilha está pública`);
+            throw new Error(`Todos os proxies falharam:\n${errors.join('\n')}`);
         }
 
         async function loadData() {
             try {
+                console.log('Iniciando carregamento das planilhas...');
                 const [almasText, hatsText, questText, colCartaText, colMapaText] = await Promise.all([
                     fetchWithProxy(SHEETS.almas),
                     fetchWithProxy(SHEETS.hats),
@@ -590,6 +597,7 @@
                     fetchWithProxy(SHEETS.colMapa)
                 ]);
 
+                console.log('✅ Todas as planilhas carregadas!');
                 allData = parseTSV(almasText);
                 allHats = parseTSV(hatsText);
                 allQuests = parseTSV(questText);
@@ -603,12 +611,15 @@
                 renderColMapa(allColMapa);
                 calcularDrop();
             } catch (error) {
+                console.error('Erro ao carregar:', error);
                 const msg = `<div class="error">
-                    ❌ ${error.message}<br><br>
-                    <strong>Publica a planilha:</strong><br>
-                    1. Arquivo > Compartilhar > Publicar na web<br>
-                    2. Seleciona cada aba >.tsv > Publicar<br>
-                    3. Compartilhar > Qualquer pessoa com link > Leitor
+                    ❌ Erro ao carregar dados<br><br>
+                    <strong>Detalhes:</strong><br>
+                    ${error.message}<br><br>
+                    <strong>Verifica:</strong><br>
+                    1. Arquivo > Compartilhar > Publicar na web > TSV<br>
+                    2. Compartilhar > Qualquer pessoa com link > Leitor<br>
+                    3. Abre F12 > Console e me manda print do erro
                 </div>`;
                 ['almas-list', 'hats-list', 'quests-list', 'colCarta-list', 'colMapa-list'].forEach(id => {
                     document.getElementById(id).innerHTML = msg;
@@ -618,8 +629,8 @@
 
         function parseTSV(text) {
             return text.split('\n')
-       .map(line => line.split('\t').map(cell => cell.trim()))
-       .filter(row => row.some(cell => cell));
+     .map(line => line.split('\t').map(cell => cell.trim()))
+     .filter(row => row.some(cell => cell));
         }
 
         function renderAlmas(data) {
@@ -716,15 +727,4 @@
 
         function renderColCarta(data) {
             const container = document.getElementById('colCarta-list');
-            const counter = document.getElementById('counterColCarta');
-
-            // Agrupa por coluna B (Coleção)
-            const grouped = {};
-            data.slice(1).forEach(row => {
-                const colecao = row[1]; // Coluna B = Coleção
-                if (!colecao) return;
-                
-                if (!grouped[colecao]) {
-                    grouped[colecao] = {
-                        nome: colecao,
-                        bonus1: row[2]
+            const counter = document.getElementById('
