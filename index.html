@@ -298,7 +298,7 @@
             border-radius: 5px;
             padding: 6px 10px;
             color: #e8eaed;
-            width: 100px;
+            width: 120px;
             text-align: center;
         }
 .calc-row input[type="checkbox"] {
@@ -317,6 +317,7 @@
             padding: 25px;
             text-align: center;
             margin-top: 20px;
+            grid-column: 1 / -1;
         }
 .calc-result h2 {
             color: #d4af37;
@@ -341,6 +342,7 @@
             border-radius: 8px;
             margin-top: 15px;
             text-align: center;
+            grid-column: 1 / -1;
         }
 .bonus-total strong {
             color: #d4af37;
@@ -454,8 +456,8 @@
                         </select>
                     </div>
                     <div class="calc-row">
-                        <label>Goma de Mascar (100%):</label>
-                        <input type="checkbox" id="goma" checked onchange="calcularDrop()">
+                        <label>Goma de Mascar (+100%):</label>
+                        <input type="checkbox" id="goma" onchange="calcularDrop()">
                     </div>
                     <div class="calc-row">
                         <label>Reborn (0-10):</label>
@@ -477,45 +479,82 @@
                         <label>Visuais (%):</label>
                         <input type="number" id="visuais" value="40" step="0.01" onchange="calcularDrop()">
                     </div>
+                    <div class="calc-row">
+                        <label>Facção:</label>
+                        <select id="faccao" onchange="calcularDrop()">
+                            <option value="0">Nenhuma</option>
+                            <option value="35">Renegado (35%)</option>
+                            <option value="25">Aether (25%)</option>
+                            <option value="25">Tartaro (25%)</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="calc-section">
-                    <h3>💜 Cartas Família (Cumulativo)</h3>
+                    <h3>💜 Cartas Família Poring</h3>
                     <div class="calc-row">
-                        <label>Qtd Cartas Família:</label>
+                        <label>Quantidade:</label>
                         <select id="qtdCartas" onchange="calcularDrop()">
-                            <option value="0">0</option>
+                            <option value="0">0 Cartas</option>
                             <option value="1">1 Carta (+2%)</option>
                             <option value="3">3 Cartas (+5%)</option>
                             <option value="5">5 Cartas (+10%)</option>
                         </select>
                     </div>
                     <div class="calc-row">
-                        <label>Bônus Manual (%):</label>
-                        <input type="number" id="bonusManual" value="0" step="0.01" onchange="calcularDrop()">
+                        <label>Alma Poporing:</label>
+                        <input type="checkbox" id="almaPoporing" onchange="calcularDrop()">
+                    </div>
+                    <div class="calc-row">
+                        <label>Alma Poring:</label>
+                        <input type="checkbox" id="almaPoring" onchange="calcularDrop()">
+                    </div>
+                    <div class="calc-row">
+                        <label>Alma Marin:</label>
+                        <input type="checkbox" id="almaMarin" onchange="calcularDrop()">
+                    </div>
+                    <div class="calc-row">
+                        <label>Alma Ancient Mimic:</label>
+                        <input type="checkbox" id="almaMimic" onchange="calcularDrop()">
+                    </div>
+                    <div class="calc-row">
+                        <label>Alma Mastering:</label>
+                        <input type="checkbox" id="almaMastering" onchange="calcularDrop()">
                     </div>
                 </div>
-            </div>
 
-            <div class="calc-section" style="margin-top: 20px;">
-                <h3>🎯 Item</h3>
-                <div class="calc-row">
-                    <label>Rate Base do Item (%):</label>
-                    <input type="number" id="rateItem" value="0.6000" step="0.0001" onchange="calcularDrop()">
+                <div class="calc-section">
+                    <h3>🗺️ Mapas</h3>
+                    <div class="calc-row">
+                        <label>Arredores Fronteira:</label>
+                        <input type="number" id="mapaArredores" value="0" min="0" max="8" onchange="calcularDrop()">
+                    </div>
+                    <div class="calc-row">
+                        <label>Campos Einbech:</label>
+                        <input type="number" id="mapaCampos" value="0" min="0" max="10" onchange="calcularDrop()">
+                    </div>
                 </div>
-            </div>
 
-            <div class="bonus-total">
-                <div>Total de Bônus de Drop:</div>
-                <strong id="totalBonus">0,00%</strong>
-            </div>
+                <div class="calc-section">
+                    <h3>🎯 Item</h3>
+                    <div class="calc-row">
+                        <label>Rate Base do Item (%):</label>
+                        <input type="number" id="rateItem" value="0.6000" step="0.0001" onchange="calcularDrop()">
+                    </div>
+                </div>
 
-            <div class="calc-result">
-                <h2>✅ RESULTADO</h2>
-                <div class="rate-final" id="rateFinal">0,0000%</div>
-                <div class="details" id="rateDetalhes">
-                    Drop Base: 0,0000%<br>
-                    1 drop a cada 0 mobs
+                <div class="bonus-total">
+                    <div>Total de Bônus de Drop:</div>
+                    <strong id="totalBonus">40,00%</strong>
+                </div>
+
+                <div class="calc-result">
+                    <h2>✅ RESULTADO</h2>
+                    <div class="rate-final" id="rateFinal">0,8400%</div>
+                    <div class="details" id="rateDetalhes">
+                        Drop Base: 0,6000%<br>
+                        1 drop a cada 119 mobs
+                    </div>
                 </div>
             </div>
         </div>
@@ -530,17 +569,13 @@
             colMapa: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2wo_xb5Uy3muY2WOe-fARzZYQv1WgzaypQfaf0jgv8Ktnn4PwPvheqaxjCTzryBx9sxDRZMAy218G/pub?gid=328982155&single=true&output=tsv'
         };
 
-        // 6 proxies diferentes pra garantir
         const PROXIES = [
-            'https://api.allorigins.win/raw?url=',
             'https://corsproxy.io/?',
             'https://api.codetabs.com/v1/proxy?quest=',
-            'https://thingproxy.freeboard.io/fetch/',
-            'https://cors-anywhere.herokuapp.com/',
-            'https://proxy.cors.sh/'
+            'https://api.allorigins.win/raw?url='
         ];
 
-        // Tabela de Reborn - coluna E (x1) e F (x3/x5)
+        // Tabela de Reborn: x1 e x3/x5
         const REBORN_TABLE = {
             0: { x1: 0, x35: 0 },
             1: { x1: 6, x35: 4 },
@@ -563,32 +598,21 @@
         let currentFilter = 'todas';
 
         async function fetchWithProxy(url) {
-            const errors = [];
-            for (let i = 0; i < PROXIES.length; i++) {
+            let lastError;
+            for (const proxy of PROXIES) {
                 try {
-                    console.log(`Tentando proxy ${i + 1}/${PROXIES.length}: ${PROXIES[i]}`);
-                    const res = await fetch(PROXIES[i] + encodeURIComponent(url), {
-                        method: 'GET',
-                        headers: { 'Accept': 'text/plain' }
-                    });
-                    if (res.ok) {
-                        const text = await res.text();
-                        console.log(`✅ Proxy ${i + 1} funcionou!`);
-                        return text;
-                    }
-                    errors.push(`Proxy ${i + 1}: ${res.status}`);
+                    const res = await fetch(proxy + encodeURIComponent(url));
+                    if (res.ok) return await res.text();
                 } catch (e) {
-                    errors.push(`Proxy ${i + 1}: ${e.message}`);
-                    console.log(`❌ Proxy ${i + 1} falhou:`, e.message);
+                    lastError = e;
                     continue;
                 }
             }
-            throw new Error(`Todos os proxies falharam:\n${errors.join('\n')}`);
+            throw new Error(`Falha ao carregar. Verifica se a planilha está pública`);
         }
 
         async function loadData() {
             try {
-                console.log('Iniciando carregamento das planilhas...');
                 const [almasText, hatsText, questText, colCartaText, colMapaText] = await Promise.all([
                     fetchWithProxy(SHEETS.almas),
                     fetchWithProxy(SHEETS.hats),
@@ -597,7 +621,6 @@
                     fetchWithProxy(SHEETS.colMapa)
                 ]);
 
-                console.log('✅ Todas as planilhas carregadas!');
                 allData = parseTSV(almasText);
                 allHats = parseTSV(hatsText);
                 allQuests = parseTSV(questText);
@@ -611,15 +634,12 @@
                 renderColMapa(allColMapa);
                 calcularDrop();
             } catch (error) {
-                console.error('Erro ao carregar:', error);
                 const msg = `<div class="error">
-                    ❌ Erro ao carregar dados<br><br>
-                    <strong>Detalhes:</strong><br>
-                    ${error.message}<br><br>
-                    <strong>Verifica:</strong><br>
-                    1. Arquivo > Compartilhar > Publicar na web > TSV<br>
-                    2. Compartilhar > Qualquer pessoa com link > Leitor<br>
-                    3. Abre F12 > Console e me manda print do erro
+                    ❌ ${error.message}<br><br>
+                    <strong>Publica a planilha:</strong><br>
+                    1. Arquivo > Compartilhar > Publicar na web<br>
+                    2. Seleciona cada aba >.tsv > Publicar<br>
+                    3. Compartilhar > Qualquer pessoa com link > Leitor
                 </div>`;
                 ['almas-list', 'hats-list', 'quests-list', 'colCarta-list', 'colMapa-list'].forEach(id => {
                     document.getElementById(id).innerHTML = msg;
@@ -717,14 +737,4 @@
                             <div class="card-title">📜 ${hatName}</div>
                             <div class="card-content">
                                 <strong>Custo:</strong> ${custo} Zeny<br>
-                                ${ingredientes.length > 0? `<div class="bonus-box"><strong>Ingredientes:</strong><br>${ingredientes.join('<br>')}</div>` : ''}
-                            </div>
-                        </div>
-                    `;
-                }).join('')}
-            </div>`;
-        }
-
-        function renderColCarta(data) {
-            const container = document.getElementById('colCarta-list');
-            const counter = document.getElementById('
+                                ${ingredientes.length > 0? `<div class="
