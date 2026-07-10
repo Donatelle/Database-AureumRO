@@ -160,7 +160,7 @@
 .btn-filter.carta.active { background: #a855f7; }
 .loading { text-align: center; padding: 40px; font-size: 1.1em; color: #d4af37; }
 .error {
-            background: rgba(239, 68, 0.1);
+            background: rgba(239, 68, 68, 0.1);
             border: 2px solid #ef4444;
             padding: 20px;
             border-radius: 10px;
@@ -218,45 +218,6 @@
             font-size: 0.85em;
         }
 .card-content strong { color: #ffa726; }
-.bonus-box {
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid #a855f7;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-.bonus-box.mapa {
-            background: rgba(59, 130, 246, 0.15);
-            border-color: #3b82f6;
-        }
-.bonus-box strong { color: #a855f7; }
-.bonus-box.mapa strong { color: #3b82f6; }
-.bonus-highlight {
-            background: rgba(255, 167, 38, 0.25);
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-weight: bold;
-            color: #ffa726;
-        }
-.cartas-list {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 3px solid #d4af37;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-.cartas-list strong { color: #d4af37; }
-.itens-list {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 3px solid #3b82f6;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-.itens-list strong { color: #3b82f6; }
 .counter { margin-bottom: 15px; color: #ffa726; font-weight: 600; font-size: 0.9em; }
 
 /* CALCULADORA DROP */
@@ -351,7 +312,7 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 1.5em; }
-    .header-top { flex-direction: column; align-items: flex-start; }
+   .header-top { flex-direction: column; align-items: flex-start; }
 .cards-grid { grid-template-columns: 1fr; }
 .tab { padding: 12px 14px; font-size: 0.8em; }
 .filter-btns { width: 100%; }
@@ -596,41 +557,7 @@
         let allColMapa = [];
         let currentFilter = 'todas';
 
-        // Event listeners pra abas
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabName = this.getAttribute('data-tab');
-                    switchTab(tabName, this);
-                });
-            });
-
-            document.querySelectorAll('.btn-filter[data-filter]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    filterType(this.getAttribute('data-filter'));
-                });
-            });
-
-            document.querySelectorAll('.btn-filter[data-clear]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    clearSearch(this.getAttribute('data-clear'));
-                });
-            });
-
-            document.getElementById('searchAlmas').addEventListener('input', () => filterItems('almas'));
-            document.getElementById('searchHats').addEventListener('input', () => filterItems('hats'));
-            document.getElementById('searchQuests').addEventListener('input', () => filterItems('quests'));
-            document.getElementById('searchColCarta').addEventListener('input', () => filterItems('colCarta'));
-            document.getElementById('searchColMapa').addEventListener('input', () => filterItems('colMapa'));
-
-            document.querySelectorAll('#calc-content input, #calc-content select').forEach(el => {
-                el.addEventListener('change', calcularDrop);
-                el.addEventListener('input', calcularDrop);
-            });
-
-            loadData();
-        });
-
+        // FIX: Função switchTab agora funciona
         function switchTab(tab, el) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
@@ -697,8 +624,8 @@
 
         function parseTSV(text) {
             return text.split('\n')
- .map(line => line.split('\t').map(cell => cell.trim()))
- .filter(row => row.some(cell => cell));
+.map(line => line.split('\t').map(cell => cell.trim()))
+.filter(row => row.some(cell => cell));
         }
 
         function renderAlmas(data) {
@@ -743,4 +670,68 @@
             counter.textContent = `${items.length} Hats encontrados`;
 
             if (items.length === 0) {
-                container.inner
+                container.innerHTML = '<div class="error">Nenhum hat encontrado</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(row => {
+                    const hatName = row[0];
+                    const hatInfo = row.slice(1).filter(Boolean).join('<br>');
+                    return `
+                        <div class="card quest">
+                            <div class="card-tag hat">HAT</div>
+                            <div class="card-title">🎩 ${hatName}</div>
+                            <div class="card-content">${hatInfo || 'Sem descrição'}</div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>`;
+        }
+
+        function renderQuests(data) {
+            const container = document.getElementById('quests-list');
+            const counter = document.getElementById('counterQuests');
+
+            const items = data.slice(1).filter(row => row[0]);
+            counter.textContent = `${items.length} Quests encontradas`;
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="error">Nenhuma quest encontrada</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="cards-grid">
+                ${items.map(row => {
+                    const hatName = row[0];
+                    const custo = row[2] || '0';
+                    const ingredientes = row.slice(3).filter(Boolean);
+                    return `
+                        <div class="card quest">
+                            <div class="card-tag quest">QUEST</div>
+                            <div class="card-title">📜 ${hatName}</div>
+                            <div class="card-content">
+                                <strong>Custo:</strong> ${custo} Zeny<br>
+                                ${ingredientes.length > 0? `<div class="bonus-box"><strong>Ingredientes:</strong><br>${ingredientes.join('<br>')}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>`;
+        }
+
+        function renderColCarta(data) {
+            const container = document.getElementById('colCarta-list');
+            const counter = document.getElementById('counterColCarta');
+
+            const grouped = {};
+            data.slice(1).forEach(row => {
+                const colecao = row[1];
+                if (!colecao) return;
+                
+                if (!grouped[colecao]) {
+                    grouped[colecao] = {
+                        nome: colecao,
+                        bonus1: row[2],
+                        bonus3: row[4],
+                        bonus5: row[6
